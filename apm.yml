@@ -9,7 +9,6 @@ license: MIT
 targets:
 - claude
 - copilot
-- opencode
 dependencies:
   apm: []
   mcp: []
