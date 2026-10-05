@@ -1,0 +1,18 @@
+name: common
+version: 0.1.0
+description: Agents and skills applicable to any project.
+author: Mert Alp Taytak
+license: MIT
+targets:
+- claude
+- copilot
+dependencies:
+  apm:
+  - git: parent
+    path: .apm/agents/product-owner.agent.md
+  - git: parent
+    path: .apm/agents/software-architect.agent.md
+  - git: parent
+    path: .apm/skills/to-file
+  mcp: []
+includes: auto
