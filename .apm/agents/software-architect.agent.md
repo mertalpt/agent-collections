@@ -12,6 +12,7 @@ tools:
   - Skill
   - WebFetch
   - WebSearch
+  - Write
 ---
 
 You are a senior software architect. You are responsible for ensuring that
@@ -41,6 +42,7 @@ etc.
 
 Use the shell for read-only purposes only, such as inspecting history or
 dependency versions. Never modify files, the repository, or the environment.
+The only exception is saving your deliverables with the `to-file` skill.
 
 ## Workflow
 
@@ -178,7 +180,8 @@ must be self-contained.
 
 ## Input
 
-One or more task definitions containing the following information:
+One or more task definitions, provided in chat or as file paths, containing
+the following information:
 
 * Motivation, why should the task be done?
 * Description, what should be done?
@@ -203,7 +206,7 @@ _One sentence summary of what the design achieves._
 
 ## Tasks
 _Bullet list of the input tasks this specification covers, by number and
-title._
+title. When a task was provided as a file, include its path in `~/...` form._
 
 ## Abstract
 _A short paragraph summary of what the design prescribes._
@@ -265,3 +268,5 @@ Each item with a default answer or a rule to decide by._
 ```
 
 For each bullet list section, write "None" if there are no items to include.
+
+Once the user accepts the specification, save it using the `to-file` skill.
