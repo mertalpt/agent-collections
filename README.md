@@ -14,3 +14,17 @@ This repository contains my collections for agent customizations based on [APM](
 | `docs/` | Holds documentation for the repository. |
 | `scripts/` | Holds scripts used to manage the repository itself. |
 
+
+## Installing a Collection
+
+Install a released collection by its tag:
+
+```bash
+apm install mertalpt/agent-collections/collections/<name>#<name>-vX.Y.Z
+```
+
+Check for newer releases with `apm outdated`. Release notes are on the [GitHub Releases](https://github.com/mertalpt/agent-collections/releases) page.
+
+## Contributing
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for commit conventions and [`docs/releasing.md`](docs/releasing.md) for how releases work.
