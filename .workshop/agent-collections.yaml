@@ -3,3 +3,21 @@ base: ubuntu@24.04
 sdks:
   - name: claude-code
   - name: gh-cli
+actions:
+  status: |
+    BOLD=$(tput bold); NORMAL=$(tput sgr0)
+    echo -e "${BOLD}# GitHub auth status${NORMAL}"
+    gh auth status || true
+    echo ""
+    echo -e "${BOLD}# Claude auth status${NORMAL}"
+    claude auth status || true
+    echo ""
+    echo -e "${BOLD}# Git remotes${NORMAL}"
+    git -C /project remote -v
+  gh-auth: |
+    echo "Prepare a fine-grained PAT for this repository."
+    gh auth login
+  claude-auth: |
+    claude auth login
+  claude-yolo: |
+    claude --dangerously-skip-permissions
