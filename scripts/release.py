@@ -361,6 +361,11 @@ def check_pr(git: Git, base: str, head: str, title: str) -> list[str]:
     return errors
 
 
+def covered_files(git: Git, rev: str) -> list[str]:
+    collections = Repo(git).collections(rev).values()
+    return [f for f in git.ls_tree(rev, ".") if any(c.covers(f) for c in collections)]
+
+
 @dataclass
 class PendingTag:
     tag: str
@@ -469,6 +474,7 @@ def main(argv: list[str] | None = None) -> int:
     pr.add_argument("--base", required=True)
     pr.add_argument("--head", required=True)
     pr.add_argument("--title", required=True)
+    sub.add_parser("covered-files", help="List files covered by any collection at HEAD.")
     sub.add_parser("release", help="Tag collections whose version is ahead of their latest tag.")
     sub.add_parser("plan", help="Create, update or close the release PR.")
     args = parser.parse_args(argv)
@@ -482,6 +488,9 @@ def main(argv: list[str] | None = None) -> int:
             return report(check_message(message))
         if args.command == "check-pr":
             return report(check_pr(Git(), args.base, args.head, args.title))
+        if args.command == "covered-files":
+            print("\n".join(covered_files(Git(), "HEAD")))
+            return 0
         if args.command == "release":
             return report(release(Git(), GitHub()))
         plan(Git(), GitHub())
