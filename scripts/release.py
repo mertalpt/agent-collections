@@ -25,8 +25,8 @@ SUBJECT_RE = re.compile(
     r": (?P<subject>\S.*?)"
     r"(?: \(#(?P<pr>\d+)\))?$"
 )
-# Subjects git generates itself, for merges and for `git commit --fixup/--squash`.
-SKIPPED_MESSAGE_PREFIXES = ("Merge ", "fixup! ", "squash! ", "amend! ")
+# Subjects git generates itself, for merges, `git revert` and `git commit --fixup/--squash`.
+SKIPPED_MESSAGE_PREFIXES = ("Merge ", 'Revert "', "fixup! ", "squash! ", "amend! ")
 
 SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 APM_YML_RE = re.compile(r"^collections/([^/]+)/apm\.yml$")
