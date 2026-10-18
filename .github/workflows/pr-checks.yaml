@@ -1,0 +1,35 @@
+name: PR checks
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-24.04
+    steps:
+      - run: gh --version
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: "3.12"
+      - run: pip install -r scripts/requirements.txt
+      - name: Check PR title and collections
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: python3 scripts/release.py check-pr --base "$BASE" --head "$HEAD" --title "$TITLE"
+      - name: Unit tests
+        run: python3 -m unittest discover -s scripts/tests
+      - uses: ./.github/actions/setup-apm
+      - name: Audit covered files for hidden Unicode
+        # `apm audit --file` takes one file per call; xargs runs them all and fails if any fails.
+        run: python3 scripts/release.py covered-files | xargs -r -d '\n' -n1 apm audit --file

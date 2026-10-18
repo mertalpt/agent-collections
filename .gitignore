@@ -1,2 +1,3 @@
 .workshop.lock
 apm_modules/
+*.pyc

@@ -12,5 +12,5 @@ Closes [issue].
 ## Checklist
 
 - [ ] Changes follow a single theme.
-- [ ] `apm.lock.yaml` is up-to-date.
+- [ ] PR title follows the conventions in `CONTRIBUTING.md`.
 - [ ] Affected `collections/*/apm.yml` references are up-to-date.
