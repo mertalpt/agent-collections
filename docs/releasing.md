@@ -25,19 +25,24 @@ A new collection is tagged with its current version on the first push to `main` 
 
 Open a normal PR that sets `version` in the collection's `apm.yml`, e.g. `feat!: declare common stable` with `version: 1.0.0`. When it merges, the workflow tags it. The version must be at least what the commits since the latest tag require.
 
-## Repository settings
-
-Change these by hand, in this order:
-
-1. **Before merging the PR that adds this workflow:** Settings → General → Pull Requests → squash merging: default commit message **Pull request title** (`PR_TITLE`) and commit message **Blank** (`BLANK`). This makes the squash commit equal to the PR title.
-2. **After that PR merges, before any `feat` or `fix` PR merges:**
-   - Settings → Actions → General: allow GitHub Actions to create and approve pull requests. The release PR needs this.
-   - A tag ruleset for `*-v*` that restricts updates and deletions. If the ruleset can give GitHub Actions a bypass for creation, restrict creation too.
-3. **Don't** enable required status checks on `main`. The release PR is created with `GITHUB_TOKEN`, so PR checks never run on it, and it would be blocked.
-
 ## Recovery
 
 - **The workflow failed temporarily** (network, GitHub outage): re-run it. Even if more PRs merged in the meantime, it tags the commit that changed the version, not the latest commit.
 - **A release commit set too low a version.** For example, an out-of-date release PR merged after a `feat` landed, or a manual bump was too small. Nothing is tagged and the job fails. The same run regenerates the release PR with the correct version from the latest tag. Merge it, and the job goes green.
-- **A bad tag or release needs to go:** delete it by hand with `gh release delete <tag> --cleanup-tag` (the tag ruleset must let you through). Then fix `version` with a PR.
-- Reusing a deleted collection's name is unsupported; the release workflow will fail.
+- **A bad tag or release needs to go:** delete it by hand with `gh release delete <tag> --cleanup-tag`. Then fix `version` with a PR.
+- **The workflow fails for a collection whose name was used before:** see [Limitations](#limitations).
+
+## Limitations
+
+### Don't reuse a deleted collection's name
+
+> [!WARNING]
+> Reusing a deleted collection's name is unsupported; the release workflow will fail or never release it.
+
+Tags outlive the collections they belong to, so a new collection with an old name inherits the old `<name>-v*` tags. Depending on its `version` compared with the latest old tag:
+
+- **Higher:** the workflow finds no commit that released it and fails with "no commit after … changes the version".
+- **Lower:** it fails with "version … is lower than the latest tag".
+- **Equal:** it's treated as already released and never tagged; the old tag points at the old collection's content.
+
+Pick a new name instead.

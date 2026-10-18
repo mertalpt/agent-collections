@@ -33,7 +33,7 @@ A collection lives in `collections/<name>/apm.yml` and pulls primitives from `.a
 - The `name` in `apm.yml` must equal the directory name. APM finds a collection's tags (`<name>-v<version>`) from its directory name.
 - A collection **covers** its own directory and every `path` of its `git: parent` dependencies. A change to a shared primitive counts for every collection that uses it.
 - Adding or removing a primitive edits the collection's `apm.yml`, so it's always covered and needs `feat` or `fix`.
-- Deleting a collection is covered too, so it needs `feat` or `fix`. Existing tags stay, so pinned installs keep working.
+- Deleting a collection is covered too, so it needs `feat` or `fix`. Existing tags stay, so pinned installs keep working. **Never reuse a deleted collection's name**; see [Limitations](docs/releasing.md#limitations).
 - A new collection picks its own starting `version`. It's tagged as-is on the first push to `main` after it's merged.
 
 ## Releases
