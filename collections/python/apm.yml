@@ -1,0 +1,14 @@
+name: python
+version: 0.1.0
+description: Instructions for Python projects. Expects the common collection.
+author: Mert Alp Taytak
+license: MIT
+targets:
+- claude
+- copilot
+dependencies:
+  apm:
+  - git: parent
+    path: .apm/instructions/python-tooling.instructions.md
+  mcp: []
+includes: auto
