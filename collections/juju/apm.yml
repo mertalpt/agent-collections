@@ -1,0 +1,22 @@
+name: juju
+version: 0.1.0
+description: Instructions and skills for Juju charm development. Expects the common and python collections.
+author: Mert Alp Taytak
+license: MIT
+targets:
+- claude
+- copilot
+dependencies:
+  apm:
+  - git: parent
+    path: .apm/instructions/charm.instructions.md
+  - git: parent
+    path: .apm/instructions/charm-verification.instructions.md
+  - git: parent
+    path: .apm/skills/run-integration-tests
+  - git: parent
+    path: .apm/skills/ci-juju-integration-triage
+  - git: parent
+    path: .apm/skills/charm-docs
+  mcp: []
+includes: auto
