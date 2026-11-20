@@ -30,5 +30,7 @@ dependencies:
     path: .apm/skills/interview
   - git: parent
     path: .apm/skills/recursive-self-improvement
+  - git: parent
+    path: .apm/skills/review-comments
   mcp: []
 includes: auto
