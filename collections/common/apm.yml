@@ -14,5 +14,23 @@ dependencies:
     path: .apm/agents/software-architect.agent.md
   - git: parent
     path: .apm/skills/to-file
+  - git: parent
+    path: .apm/instructions/working-agreement.instructions.md
+  - git: parent
+    path: .apm/instructions/questions.instructions.md
+  - git: parent
+    path: .apm/instructions/documentation-standards.instructions.md
+  - git: parent
+    path: .apm/instructions/testing.instructions.md
+  - git: parent
+    path: .apm/instructions/secrets.instructions.md
+  - git: parent
+    path: .apm/skills/brief
+  - git: parent
+    path: .apm/skills/interview
+  - git: parent
+    path: .apm/skills/recursive-self-improvement
+  - git: parent
+    path: .apm/skills/review-comments
   mcp: []
 includes: auto
