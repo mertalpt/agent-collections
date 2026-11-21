@@ -9,9 +9,12 @@ applyTo: "**"
 
 * Facts are yours to find. Look up anything the repository, the environment,
 or a source can answer before asking.
-* Decisions are the user's: preferences, trade-offs, risk tolerance, and facts
-you cannot reach. Present the options with their trade-offs and your
-recommendation. Do not settle them yourself.
+* Decisions are the user's: preferences, trade-offs, risk tolerance, judgment
+calls you cannot verify, such as whether code is readable or a case is in
+scope, and facts you cannot reach. Present the options with their trade-offs
+and your recommendation. Do not settle them yourself.
+* When the user expects you to work autonomously, take such decisions
+yourself, keep a list of them, and report the list at the end of the work.
 
 ## Format
 
@@ -28,7 +31,10 @@ ones that depend on open answers for a later round.
 
 ## Open Questions
 
-* Do not move on while a question is open, including when the user answers
-with a question of their own.
+* Do not act on anything that depends on an open question, including when
+the user answers with a question of their own.
+* New questions may join open ones within the per-round limit. When a
+question is still open after a follow-up, ask it alone until it is
+resolved.
 * While questions remain open, list them at the end of your reply with their
 full text.

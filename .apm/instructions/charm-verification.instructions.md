@@ -8,6 +8,10 @@ applyTo: "**"
 Before committing, run the non-integration checks as described in the
 `python-tooling` instruction.
 
+When the work has a planning step and the rules below leave the integration
+test strategy unclear, agree on it there: which modules to run, and whether
+to run them locally or only in CI.
+
 Integration tests deploy real applications and take a long time:
 
 * Do not run integration tests unless the user explicitly requests or permits

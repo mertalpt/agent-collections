@@ -5,7 +5,6 @@ description: >-
   it in another repository, or review it. Use when the user asks for a brief,
   a handoff, or a prompt to start a new session.
 argument-hint: "What will the next session be used for?"
-disable-model-invocation: true
 ---
 
 ## Motivation

@@ -24,8 +24,9 @@ If the pull request cannot be reached, work from comments the user pastes.
 
 Save the comments to a temporary file and work from that file. Group related
 comments: comments that share a topic, a root cause, or a likely fix, even
-across files. Order the groups by the location of their first comment, and
-order the comments within a group by file and line. Assign `R1`, `R2`, ... in
+across files. Put groups that others depend on first; otherwise order them
+by the location of their first comment. Order the comments within a group by
+file and line. Assign `R1`, `R2`, ... in
 that order, one identifier per thread. Record each comment's identifier,
 group, location, link, and status alongside it.
 

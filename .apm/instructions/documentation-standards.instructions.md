@@ -37,9 +37,7 @@ the same file is fine, since the referent travels with it. When a short fact
 recurs across structurally identical peers, duplicate it tersely rather than
 cross-reference it: duplication is local and honest; cross-file coupling rots.
 
-Prefer ASCII. Pad Markdown table cells so every column aligns in the raw
-source, including the delimiter row; a table is read unrendered as often as
-rendered.
+Prefer ASCII.
 
 Do not audit existing code for missing docs unless asked, but document a
 hard-won gotcha when you hit one.
@@ -61,6 +59,10 @@ says otherwise.
 * **Pull request:** why the change was made, and what is useful to know for
 future changes. Use the repository's pull request template when it has one,
 and keep its sections.
+* **Template:** write each section for the reader it addresses, as its
+heading and guidance define it. A "Test instructions" section tells a
+reviewer how to test the change; it is not a report of how you tested it.
+When a section's purpose is unclear, it is the user's decision.
 * **Decision record:** why the system is shaped as it is. The decision body is
 immutable. A correction to a still-valid decision is a dated append; a
 refinement or reversal is a new record that marks the old one as superseded.

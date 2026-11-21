@@ -5,6 +5,11 @@ applyTo: "**"
 
 # Secrets
 
+When the user or the environment's instructions state that an environment
+is local and disposable, its own secrets, such as generated test
+passwords, are exempt from the first two rules. The other rules still
+apply: files and commits outlive the environment.
+
 * Do not read or print secret values, such as tokens, passwords, private keys,
 and credential files. Redact any that appear in output you show.
 * Never ask the user to paste a secret into the conversation. If a task needs

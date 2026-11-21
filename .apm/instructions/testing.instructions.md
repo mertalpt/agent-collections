@@ -1,5 +1,5 @@
 ---
-description: "What earns a test or check, which shapes to avoid and prefer, and how to prove a test can fail."
+description: "What earns a test, what to cover, and which shapes to avoid and prefer."
 applyTo: "**"
 ---
 
@@ -7,60 +7,66 @@ applyTo: "**"
 
 ## Principle
 
-A test exists to catch a failure that the existing safety nets do not. Safety
-nets include type checks, linters, CI, reverting a change, and failures that
-are loud the moment the change is used. Weigh what a test costs to write, run,
-and maintain against what its failure would cost without it. Concluding that
-no test is needed is a valid outcome; a comment where the breaking change would
-be made is often enough.
+A test exists to catch a failure before it reaches users or is found far
+from its cause. Weigh what a test costs to write, run, and maintain against
+what its failure would cost without it. Do not duplicate what type checks,
+linters, or a failure at build or startup already catch. Concluding that no
+test is needed is a valid outcome.
 
-There are two kinds of tests:
+## Kinds of Tests
 
 * **Agreement tests** check that two or more parts agree, such as a client and
 the service it calls, or configuration and the code that reads it. They are
 right or wrong regardless of what anyone intended.
-* **Decision tests** pin a behavior that was chosen. They necessarily restate
-the choice; their value is that a reader can confirm the behavior at a glance,
-so keep them short and readable.
+* **Decision tests** pin a behavior that was chosen, such as a default, or
+an invariant that must hold however the code around it changes. They
+restate the choice; keep them short so a reader can confirm it at a glance.
 
 ## What Earns a Test
 
-Apply these in order:
+1. **Behavior.** A behavior the code owns and others rely on, tested through
+the interface they use.
+2. **Distance.** A constraint that a change elsewhere could break unnoticed:
+another module, a dependency upgrade, or the way parts combine.
+3. **Irreversibility.** A failure that would be silent and costly to undo,
+such as lost or corrupted data, exposed secrets or data, or traffic sent
+where it should not go. It earns a test even when unlikely.
 
-1. **Distance.** A test earns its place when the change that would break it is
-likely made somewhere the reason is not visible: another module, a dependency,
-an upstream default, or the way parts are combined. If a comment at the place
-of the breaking change would explain the constraint, the comment is enough.
-2. **Irreversibility.** A test earns its place regardless of distance when its
-failure would be silent and not undone by reverting the change: lost or
-corrupted data, exposed secrets or data, or traffic sent where it should not
-go. Failures that are loud and reversible do not qualify, however alarming
-they sound.
-3. **No duplication.** If the first two leave it unclear, reject a test that
-can be satisfied by copying a line out of the code it tests.
+## What to Cover
+
+* The intended path, and the designed-for failure paths: invalid input, a
+missing dependency, or a refused operation produces the intended error.
+Edge cases the task or design does not settle are the user's decision, as
+described in the `working-agreement` instruction; so are their tests.
+* A bug fix comes with a test that fails without the fix. Run it once
+before applying the fix to confirm.
+* Test your use of a dependency, not the dependency. Do not test that a
+database stores what an `INSERT` writes. Do test an endpoint that wraps the
+`INSERT`: the test covers your configuration, connection, permissions, and
+use of the library.
 
 ## Shapes
 
 Avoid:
 
-* restating a value that is declared in the code under test;
-* comparing two expressions that read the same source, which cannot fail,
-including asserting that a mock returns what it was configured to return;
-* a hardcoded list of expected items, which cannot catch an item that is added
-later without the tested property.
+* restating a value declared in the code under test, or any test that can be
+satisfied by copying a line out of it;
+* comparing two expressions that read the same source, including asserting
+that a mock returns what it was configured to return;
+* asserting on implementation details, such as private calls or internal
+state, when the behavior is observable through the interface;
+* mocking what is cheap to use for real, such as pure functions, value
+objects, or a temporary file or in-memory database.
 
-Prefer, in this order:
+Prefer:
 
-1. a negative assertion that nothing else was added or exposed;
-2. a property checked over every item the code produces or discovers;
-3. an assertion of the reason behind a choice rather than its value;
-4. a check over how parts combine, which no single part can see.
+* assertions on observable behavior: return values, raised errors, output,
+and calls that cross the boundary;
+* one behavior per test, named after the behavior;
+* a property checked over every item the code produces, rather than a
+hardcoded list of expected items, when items can be added later.
 
-## Proof
+## Existing Tests
 
-* Prove every new test can fail: violate its property on purpose, confirm the
-test fails with a message that explains the problem, then revert.
-* Prefer reporting every violation in one run over stopping at the first.
-* Failures that cannot be undone should block the change before it is merged
-or deployed. Failures that are merely undesirable may be reported instead.
-* Do not delete existing tests unless asked. Flag the ones these rules reject.
+* Do not delete existing tests unless asked. Flag the ones these rules
+reject.

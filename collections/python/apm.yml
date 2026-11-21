@@ -10,5 +10,7 @@ dependencies:
   apm:
   - git: parent
     path: .apm/instructions/python-tooling.instructions.md
+  - git: parent
+    path: .apm/instructions/python-code.instructions.md
   mcp: []
 includes: auto

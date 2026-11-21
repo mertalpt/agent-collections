@@ -5,13 +5,15 @@ applyTo: "**"
 
 # Juju Charms
 
-These are the current standards. A repository may not meet them yet. If you
-find legacy elements, such as no reconciler, widespread `event.defer`, or
-legacy test frameworks, warn the user once and proceed with the task. Do not
-warn when the task is the migration itself.
+These are the standards for new charms and for migrations. In an existing
+repository, follow its conventions, as described in the `working-agreement`
+instruction. If they differ from these standards, such as no reconciler,
+widespread `event.defer`, or legacy test frameworks, mention it once and
+proceed. Do not migrate unless the task is the migration.
 
-Charms are generic: no references to internal projects, teams, or
-infrastructure.
+Charms serve any operator, not one organization: defaults, docs, and
+examples must not assume a particular organization's environment, such as
+its registries, endpoints, or naming.
 
 ## Repository
 
@@ -23,8 +25,9 @@ the repository owns it. Do not edit vendored libraries; update them with
 `charmcraft fetch-libs`. When one changes, check how the charm's code uses
 it.
 * **`tests/`**: unit tests use Scenario (`ops.testing`); integration tests use
-Jubilant. `ops.testing.Harness` and `pytest-operator` are deprecated. Write new
-tests with the current frameworks, adding them as dependencies if missing.
+Jubilant. `ops.testing.Harness` and `pytest-operator` are deprecated. In a
+repository that still uses them, write new tests with the framework already
+in use.
 * **`<charm>_rock/`**: `rockcraft` files for the charm's rocks.
 * **`charmcraft.yaml`**: charm metadata. It documents every configuration
 option.
@@ -47,16 +50,22 @@ raise the documentation impact in the plan.
   configuration, the Pebble plan.
   3. **Apply:** push files, update the Pebble layer, `replan`, call workload
   APIs.
-* The pipeline is idempotent and converges over later events, including
-`update-status`. Do not add synthetic retries or persistent retry state.
+* The pipeline is idempotent and eventually consistent: what one event
+cannot finish, a later one does, including `update-status`. Do not add
+synthetic retries, persistent retry state, or handling for transient states
+that a later event resolves. The same holds for every event handler.
 * Unmet preconditions return early and surface as status. Do not use
-`event.defer()` unless there is an exceptional reason the user approved.
-* Side effects are idempotent. Compare desired and actual state before
-applying when checking is cheaper than applying; a workload restart is
-expensive.
-* Install is part of the pipeline and idempotent: `snap install` is safe;
-check for a package before `apt install`.
-* For charms with several modes, route to `_reconcile_<mode>` early.
+`event.defer()` unless there is an exceptional reason approved by the user.
+* Side effects are idempotent: applying the same desired state again
+changes nothing.
+* In machine charms, installing is part of the pipeline. `snap install`
+leaves an installed snap alone, but `apt install` upgrades an installed
+package when a newer version is available: use `--no-upgrade` or check
+for the package first.
+* When configuration switches the charm between roles that run different
+workloads, such as a coordinator and a worker, branch once at the start of
+the pipeline into one function per role, rather than checking the role
+throughout.
 
 ### Workload Changes
 
@@ -65,13 +74,15 @@ the rendered state (configuration and files) into the Pebble layer
 environment and call `replan`, so the workload restarts only when its inputs
 changed, and at most once per hook. Prefer a hot reload when the workload
 supports it.
-* Write files only when their content changed.
-* Secret values go into files in the workload container, never into the
-Pebble environment or logs. File contents feed the plan hash.
-* Do not use `level: alive` on Pebble checks. Take care with
-`on-check-failure` restarts: a check that fails during a slow startup causes a
-restart loop.
-* Open required ports explicitly with `open_port` or `set_ports`.
+* Prefer passing secret values to the workload in files over the Pebble
+environment: environment values are inherited by child processes and often
+end up in debug output, such as `pebble plan` or crash reports.
+* Do not give Pebble checks `level: alive` unless a container restart is
+the fix: alive checks drive the Kubernetes liveness probe, which restarts
+the whole container. Use a check without a level, and `on-check-failure:
+restart` on the service.
+* Declare the workload's ports with `unit.set_ports` in the pipeline. On
+Kubernetes, the application's Service carries only declared ports.
 
 ### Responsibilities
 
@@ -86,20 +97,20 @@ module-level functions that take only what they need: `ops.Model`,
 | Path                 | Contents                                                        |
 | -------------------- | --------------------------------------------------------------- |
 | `src/charm.py`       | Wiring and pipeline                                             |
-| `src/literals.py`    | Constants: ports, paths, container, service and endpoint names  |
-| `src/state.py`       | Dataclasses for inputs and desired state                        |
+| `src/constants.py`   | Constants: ports, paths, container, service and endpoint names  |
+| `src/state.py`       | Dataclasses for the pipeline's inputs and desired state         |
 | `src/exceptions.py`  | Typed exceptions                                                |
 | `src/relations/`     | One module per endpoint                                         |
 | `src/workload/`      | Rendering, Pebble layer and file pushes, workload API client    |
-| `src/core/`          | Pure domain logic, free of Juju concepts                        |
+| `src/core/`          | Pure domain logic, free of Juju concepts; it does not import `ops` |
 
 * Name relation modules after endpoints, so that the requirer and provider
 sides of one interface stay separate. Share only the schema between them.
 
 ### Data
 
-* Use dataclasses for data passed around inside the charm, and Pydantic at
-parsing boundaries: charm config through `ops.CharmBase.load_config`, and
+* The charm's boundaries, in the sense of the `python-code` instruction,
+include charm config, loaded through `ops.CharmBase.load_config`, and
 databags read from other applications.
 * `relation.load` only reads. Use a custom decoder to shape data where needed,
 and prefer a charm library's reader where it offers a good one.
@@ -132,12 +143,20 @@ contributes its status, and ops reports the highest priority.
 * Invalid configuration is `BlockedStatus`. Waiting on another unit,
 relation, or secret is `WaitingStatus`. Reserve error states for serious
 failures; do not let a charm flip between error and active.
-* When one of several independent operations fails, such as creating
-resources that already exist, continue with the rest.
+* An "already exists" error from a create call is success only when the
+existing resource matches the desired one. If it differs and the charm owns
+it, converge it like any other drift. If the charm does not own it, leave it
+alone and surface the clash as status.
+* When one of several independent operations fails, continue with the rest,
+then surface the failures as status. Stop the pipeline instead when the
+failure affects the rest, such as an unreachable workload API, or when
+continuing could do damage.
 
 ## Integration Tests
 
-* A `charm` fixture uses an existing packed charm rather than packing one.
+* Prefer a `charm` fixture that takes the path of a packed charm, such as
+from a `--charm-file` option, so tests run the artifact CI built instead of
+packing their own.
 * Order-dependent tests in a module use an incremental marker, so the tests
 after a failure are not run against a broken deployment.
 * Simulate crashes by deleting the pod with `kubectl`, not by removing and

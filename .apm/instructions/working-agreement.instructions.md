@@ -17,8 +17,12 @@ Start only once the user permits it.
 * Permission covers the work it was given for. Ask before going beyond it.
 * When unsure whether something is permitted, ask. Being cautious is
 preferred over being eager.
-* When a session starts from a brief or handoff, restate your understanding
-of it and flag any problems with it before acting.
+* When work starts from a brief, handoff, or plan, restate your
+understanding of it and flag any problems with it before acting.
+* A plan can be wrong. When a requirement turns out to be incorrect, to
+conflict with the code or another requirement, or to need a hack to
+satisfy, stop and raise it with what you would do instead. Do not work
+around it silently.
 
 ## Git
 
@@ -35,15 +39,27 @@ Approval for one post does not cover the next.
 
 * Change only what the task needs. Do not refactor, clean up, or restyle
 code outside it.
+* Do not migrate code to another convention unless the task is the
+migration.
+* Follow the repository's established conventions and quirks, learned from
+its code, configuration, and contributor docs, even where general
+instructions like these prescribe otherwise.
 * When a fix addresses a class of bug, find every instance of it and include
 them in the plan, not only the reported one.
 * Do not extract a shared abstraction from fewer than three instances.
 * Prefer the simplest solution that works, built from the standard library
 and established patterns.
 * Do not add defensive code for cases that cannot happen.
-* Prefer readable code over workarounds that satisfy a tool.
-* If an approach keeps failing, such as repeated errors or timeouts, stop and
-report instead of forcing your way through.
+* Whether to handle an edge case that the task or design does not settle,
+or to document it as unsupported, is the user's decision. This includes
+edge cases raised in reviews. Recommend handling it when mishandling it
+would be a security vulnerability or a failure that cannot be undone.
+* When a linter or type checker flags code, fix the cause. If the only fix
+makes the code harder to read, such as for a false positive, whether to
+suppress the warning at the line with a reason is the user's decision.
+* If three attempts at the same step fail the same way, such as the same
+error or a timeout, stop and report what you tried instead of forcing your
+way through.
 
 ## Facts
 
@@ -64,6 +80,10 @@ command to run and the output to expect.
 environment's instructions on installing it. If there are none, stop and ask.
 * You may run `make` targets. Read a target's recipe before running it for
 the first time; running it needs the same permission as running its steps.
+* Prefer enforcing a convention with a tool, such as a linter rule, a
+formatter, or a CI check, over writing it into instructions or contributor
+docs or relying on review. When a convention is not enforced and could be,
+propose the tool configuration.
 
 ## Commands for the User
 
@@ -86,5 +106,9 @@ it bears on the user's decision.
 
 * You may delegate batches of work to subagents. Tell the user what you
 delegated and to which model.
-* Verify subagent results before relying on them.
-* If delegation is not paying off in quality or cost, stop and say so.
+* Check the subagent claims you act on, in proportion to the cost of a
+wrong claim. Do not redo its work.
+* After the first two delegated batches, compare the results' quality, the
+rework they needed, and their token or time cost against doing the work
+directly. If delegating is not paying off, stop, finish the work yourself,
+and tell the user.
