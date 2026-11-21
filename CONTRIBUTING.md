@@ -8,6 +8,14 @@ Install [pre-commit](https://pre-commit.com/) and PyYAML (`scripts/requirements.
 pre-commit install --hook-type commit-msg
 ```
 
+Then install the agent customizations used to develop this repository:
+
+```bash
+cd dev && apm install --root ..
+```
+
+This deploys the collections pinned in [`dev/apm.yml`](dev/apm.yml) to `.claude/` and `.github/`. The deployed files are ignored by Git, so rerun it after a fresh clone or after changing the pins. Don't run `apm install` from the repository root: it would deploy every primitive in `.apm/`, including ones that don't apply here.
+
 ## Commit messages and PR titles
 
 PRs are squash-merged and the squash commit on `main` is the PR title, so the PR title is what counts. The hook checks local commits for the same format, but only the PR title affects releases.

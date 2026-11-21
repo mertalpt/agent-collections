@@ -11,6 +11,7 @@ This repository contains my collections for agent customizations based on [APM](
 | `.github/` | Hold GitHub configurations. |
 | `.workshop/` | Holds [Workshop](https://ubuntu.com/workshop) files used to sandbox agents used to develop the repository. |
 | `collections/` | Holds "virtual" APM packages built from grouping base files in `.apm/`. |
+| `dev/` | Holds the APM manifest for the collections used to develop the repository. |
 | `docs/` | Holds documentation for the repository. |
 | `scripts/` | Holds scripts used to manage the repository itself. |
 
