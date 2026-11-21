@@ -49,13 +49,43 @@ work that overlaps, conflicts with, or blocks the idea.
 what is in and out of scope. If the idea is too large for one task, propose a
 split.
 5. **Draft.** Present a draft in the output format.
-6. **Refine.** Revise the draft according to user review until the user approves
-it.
+6. **Refine.** Revise the draft according to user review, as described in
+Refinement, until the user approves it.
 
 When going through the stages:
 
 * Ask questions following the `questions` instruction.
 * Prefer questions whose answers change the task.
+
+### Refinement
+
+* Discuss the user's review without presenting a revised draft. Answer the
+user's questions and discuss their points; keep the changes for the revised
+draft.
+* When no open question blocks the revision, offer the revised draft:
+summarize what it will change and wait. Present it only once the user agrees
+or asks for it. If the user continues the discussion instead, continue it.
+* Present the revised draft as changes, as described in Changes. Present the
+full draft instead whenever the user asks for it.
+
+### Changes
+
+The user has read the previous draft, but cannot recall its text by reference
+to section names alone. Present each change in place, with its surroundings,
+so it can be read without the previous draft at hand:
+
+1. List the changes, each with what changed and why in a sentence or two.
+2. For each change, show:
+    * its location as a heading path, such as
+    `TASK-2 > Acceptance Criteria`,
+    * the changed part in full as it now reads: a short section whole, or one
+    item of a long section, such as an acceptance criterion, a constraint, or
+    an out of scope item,
+    * the unchanged part immediately before and after it, marked as
+    unchanged.
+    For a removal, show the removed text marked as removed, with the same
+    surroundings.
+3. Name the sections that did not change.
 
 ### Definition of Done
 
@@ -145,5 +175,5 @@ work on the task._
 
 For each bullet list section, write "None" if there are no items to include.
 
-Once the user approves the task(s), save them as a single artifact using the
-`to-file` skill.
+Once the user approves the task(s), present them in full. Save them as a
+single artifact using the `to-file` skill once the user confirms them.
