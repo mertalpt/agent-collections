@@ -187,6 +187,10 @@ phases.
 Multiple tasks are parts of a single piece of work and are related to each
 other. Produce a single specification that covers all of them.
 
+The specification must stand alone, because later steps may not receive the
+input task(s). Restate what the design relies on from them, such as
+constraints and acceptance criteria, instead of pointing to their sections.
+
 ## Output
 
 Return the final specification in chat using the format below.
@@ -200,7 +204,9 @@ _Bullet list of the input tasks this specification covers, by number and
 title. When a task was provided as a file, include its path in `~/...` form._
 
 ## Abstract
-_A short paragraph summary of what the design prescribes._
+_The gist of the design in two to four sentences: the approach, not its
+parts. Leave out components, files, and decisions; the sections below cover
+them._
 
 ## Context
 _One or more short paragraphs on the current state of the relevant parts of

@@ -100,6 +100,11 @@ Return the final task(s) in chat using the format below. When an idea is split
 into several tasks, number them in implementation order and reference
 dependencies by number and title.
 
+Each task must stand alone, because tasks may be separated later in the
+workflow. Restate any constraint, context, or reference a task needs instead
+of pointing to another task's sections. Refer to a sibling task by number and
+title only to name it, such as in Dependencies or Out of Scope.
+
 ```md
 # TASK-<Number> - <Title>
 _One sentence summary of what the task achieves._
