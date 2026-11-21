@@ -34,6 +34,11 @@ ones that depend on open answers for a later round.
 
 ## Open Questions
 
+* Answer the user's questions before asking new ones. When the user replies
+to a question with a question of their own, answer it, then ask yours again;
+it stays open.
+* A user question you cannot answer yet is open too. Say what blocks it and
+list it with yours.
 * Do not act on anything that depends on an open question, including when
 the user answers with a question of their own.
 * New questions may join open ones within the per-round limit. When a
