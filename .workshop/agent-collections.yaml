@@ -12,11 +12,21 @@ actions:
     echo -e "${BOLD}# Claude auth status${NORMAL}"
     claude auth status || true
     echo ""
+    echo -e "${BOLD}# Git identity${NORMAL}"
+    git config --global user.name || true
+    git config --global user.email || true
+    echo ""
     echo -e "${BOLD}# Git remotes${NORMAL}"
     git -C /project remote -v
   gh-auth: |
     echo "Prepare a fine-grained PAT for this repository."
     gh auth login
+    gh auth setup-git
+  git-identity: |
+    read -rp "Git user.name: " name
+    read -rp "Git user.email: " email
+    git config --global user.name "$name"
+    git config --global user.email "$email"
   claude-auth: |
     claude auth login
   claude-yolo: |
