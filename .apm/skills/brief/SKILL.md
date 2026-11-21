@@ -30,11 +30,7 @@ this session started.
 Use the format below. Include only what the next session needs for its
 purpose.
 
-* Do not duplicate content already captured in durable artifacts such as
-specs, plans, decision records, issues, commits, or diffs. Reference them by
-path or URL instead.
-* Leave out trial and error. State the conclusions and what was ruled out,
-not the path to them.
+* State what was ruled out, so the next session does not retry it.
 * Follow the `documentation-standards` and `secrets` instructions.
 
 ### 3. Save the brief

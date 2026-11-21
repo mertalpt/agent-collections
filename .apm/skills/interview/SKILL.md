@@ -13,8 +13,7 @@ Work the tree in **rounds**. The **frontier** is every decision whose
 prerequisites are already settled: the questions you can ask _now_ without
 guessing at answers you have not heard yet. Each round, ask from the frontier
 following the `questions` instruction, choosing the questions that unblock the
-most. A question whose answer depends on another open question belongs to a
-later round.
+most.
 
 Each round of answers reshapes the tree: settled decisions push the frontier
 outward and unblock the questions that depended on them. Recompute the

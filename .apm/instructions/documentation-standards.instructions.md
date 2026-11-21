@@ -1,5 +1,5 @@
 ---
-description: "What to document and how, for every durable artifact: code comments, commits, pull requests, issues, decision records, and docs."
+description: "What to document and how, for every artifact that outlives the session: code comments, commits, pull requests, issues, decision records, docs, and saved session artifacts."
 applyTo: "**"
 ---
 
@@ -18,29 +18,49 @@ cosmetic or a matter of taste.
 Prefer self-documenting code to a comment. Document only what the code cannot
 say, and document a quirk once, at the interface that owns it.
 
-Every artifact stands alone: understandable from durable artifacts (committed
-files, decision records, issues), never from the process that produced it.
-Do not refer to the conversation, review rounds, earlier attempts, or
-documents that will not outlive the session. State a why as the mechanism
-itself, not the story of discovering it: cut experiential provenance
-("confirmed the hard way", "turns out", "we hit this"); keep the fact, drop
-the witness. Explain by linking to a durable artifact rather than reproducing
-it; naming a path or identifier is fine, but a pasted block of code or output
-is not the explanation. An exact identifier or error string may be quoted when
-it is itself the fact.
+Every artifact stands alone: its readers understand it from what they can
+follow, never from the process that produced it. A reference is followable
+when every reader of the artifact can reach its target for as long as the
+artifact is in use:
 
-Each fact has one home; the rest link to it. A link may target only a durable
-owner of the fact, such as a decision record, a doc, or an upstream identifier
-or path, never a peer source file or a symbol defined in one: the fact does
-not belong there, and the name rots independently. A pointer to a symbol in
-the same file is fine, since the referent travels with it. When a short fact
-recurs across structurally identical peers, duplicate it tersely rather than
-cross-reference it: duplication is local and honest; cross-file coupling rots.
+* **Reach:** an artifact's readers are those who can reach the place that
+holds it. Refer only to targets those readers can reach. A repository's
+files, commits, and pull requests may refer to the repository, its tracker,
+and public sources, but not to local files or a private artifact store.
+When you cannot tell whether the readers can reach a target, ask.
+* **Lifetime:** durable artifacts last as long as the place that holds
+them, such as committed files, decision records, issues, and pull requests.
+Semi-durable artifacts outlive the session but may be removed, such as
+files saved with the `to-file` skill. Ephemeral artifacts may not outlive
+the session, such as the conversation, review rounds, earlier attempts, and
+temporary files. Refer only to targets that live at least as long as the
+artifact, except as follows.
+
+An artifact may refer to a shorter-lived target, such as a log dump under
+`/tmp` or a CI run whose logs expire, when it says the target may be gone and
+states the facts it needs from it, such as the error line.
+
+State a why as the mechanism itself, not the story of discovering it: cut
+experiential provenance ("confirmed the hard way", "turns out", "we hit
+this"); keep the fact, drop the witness. Explain by linking to the fact's
+owner rather than reproducing it; naming a path or identifier is fine, but a
+pasted block of code or output is not the explanation. An exact identifier or
+error string may be quoted when it is itself the fact.
+
+Each fact has one home; the rest link to it. A link may target only an owner
+of the fact that is followable as described above, such as a decision record,
+a doc, or an upstream identifier or path, never a peer source file or a symbol
+defined in one: the fact does not belong there, and the name rots
+independently. A pointer to a symbol in the same file is fine, since the
+referent travels with it. When a short fact recurs across structurally
+identical peers, duplicate it tersely rather than cross-reference it:
+duplication is local and honest; cross-file coupling rots.
 
 Prefer ASCII.
 
 Do not audit existing code for missing docs unless asked, but document a
-hard-won gotcha when you hit one.
+hard-won gotcha when you hit one in code the task changes; otherwise,
+propose it.
 
 ## Per-Artifact Rules
 
@@ -73,5 +93,3 @@ refinement or reversal is a new record that marks the old one as superseded.
 * **Operational runbook:** its verbatim commands, configuration, paths, and
 output are the point; it may relax ASCII and formal tone. The why stays
 inline, linking a durable reference when there is one.
-
-Repository conventions for any of these artifacts take precedence.

@@ -33,4 +33,5 @@ local variables only where the type checker cannot infer them.
 
 * Write docstrings in Google style. Where the repository lints with ruff and
 does not enforce a docstring convention, propose setting
-`[tool.ruff.lint.pydocstyle] convention = "google"`.
+`[tool.ruff.lint.pydocstyle] convention` to the style the repository uses,
+or to `"google"` when it has none.

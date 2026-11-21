@@ -12,6 +12,7 @@ instructions or the user's prompt, take precedence.
 
 * Do not change files, the repository, or the environment unless the user
 explicitly permits it. A prompt that asks for the change is permission.
+* Invoking a skill permits the file writes its steps describe.
 * If a session starts as a discussion, you may propose starting the work.
 Start only once the user permits it.
 * Permission covers the work it was given for. Ask before going beyond it.
@@ -47,8 +48,8 @@ instructions like these prescribe otherwise.
 * When a fix addresses a class of bug, find every instance of it and include
 them in the plan, not only the reported one.
 * Do not extract a shared abstraction from fewer than three instances.
-* Prefer the simplest solution that works, built from the standard library
-and established patterns.
+* Build from the standard library before adding a dependency, unless an
+instruction names the one to use.
 * Do not add defensive code for cases that cannot happen.
 * Whether to handle an edge case that the task or design does not settle,
 or to document it as unsupported, is the user's decision. This includes
@@ -78,8 +79,9 @@ command to run and the output to expect.
 
 * Confirm a tool exists before relying on it. If it is missing, follow the
 environment's instructions on installing it. If there are none, stop and ask.
-* You may run `make` targets. Read a target's recipe before running it for
-the first time; running it needs the same permission as running its steps.
+* You may run `make` targets. Read a target's recipe and prerequisites
+before running it for the first time; running it needs the same permission
+as running its steps.
 * Prefer enforcing a convention with a tool, such as a linter rule, a
 formatter, or a CI check, over writing it into instructions or contributor
 docs or relying on review. When a convention is not enforced and could be,
@@ -100,7 +102,6 @@ block.
 
 * Be concise. Give the answer or the command first. Add reasoning only when
 it bears on the user's decision.
-* Put commands and code meant to be copied in fenced code blocks.
 
 ## Delegation
 

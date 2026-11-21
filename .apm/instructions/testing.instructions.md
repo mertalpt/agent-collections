@@ -53,8 +53,6 @@ Avoid:
 satisfied by copying a line out of it;
 * comparing two expressions that read the same source, including asserting
 that a mock returns what it was configured to return;
-* asserting on implementation details, such as private calls or internal
-state, when the behavior is observable through the interface;
 * mocking what is cheap to use for real, such as pure functions, value
 objects, or a temporary file or in-memory database.
 
@@ -62,11 +60,10 @@ Prefer:
 
 * assertions on observable behavior: return values, raised errors, output,
 and calls that cross the boundary;
-* one behavior per test, named after the behavior;
 * a property checked over every item the code produces, rather than a
 hardcoded list of expected items, when items can be added later.
 
 ## Existing Tests
 
-* Do not delete existing tests unless asked. Flag the ones these rules
-reject.
+* Do not delete existing tests unless asked. Among the tests the task
+changes, flag the ones these rules reject.

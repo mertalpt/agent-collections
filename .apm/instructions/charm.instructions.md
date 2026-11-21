@@ -9,7 +9,7 @@ These are the standards for new charms and for migrations. In an existing
 repository, follow its conventions, as described in the `working-agreement`
 instruction. If they differ from these standards, such as no reconciler,
 widespread `event.defer`, or legacy test frameworks, mention it once and
-proceed. Do not migrate unless the task is the migration.
+proceed.
 
 Charms serve any operator, not one organization: defaults, docs, and
 examples must not assume a particular organization's environment, such as
@@ -112,16 +112,21 @@ sides of one interface stay separate. Share only the schema between them.
 * The charm's boundaries, in the sense of the `python-code` instruction,
 include charm config, loaded through `ops.CharmBase.load_config`, and
 databags read from other applications.
+* Parse boundary data into Pydantic models first, so that it reaches the
+dataclasses in `src/state.py` only once validated.
 * `relation.load` only reads. Use a custom decoder to shape data where needed,
 and prefer a charm library's reader where it offers a good one.
-* Provider sides need no databag models; the charm owns that data.
+* A provider needs no model for its own databag, even when reading it back;
+the charm owns that data.
 * Build workload configuration as data and serialize it, e.g. with
 `yaml.safe_dump`. Where templates are clearer, keep them declarative, with the
 logic in the code that prepares their data.
 
 ### Configuration
 
-* Choose opinionated, sane defaults.
+* Give each option an opinionated default that works for most deployments,
+rather than leaving it empty or required. Override options are the
+exception.
 * An override option has no default: when empty, the charm derives the value;
 when set, the value overrides it. Document the precedence in `charmcraft.yaml`
 and `README.md`.
@@ -131,8 +136,7 @@ config.
 ### Secrets
 
 * Exchange secrets through Juju secrets, not plaintext relation databags.
-* Application-owned secrets are created by the leader and shared by ID;
-followers wait until the secret exists.
+* Application-owned secrets are created by the leader and shared by ID.
 * A value held in a Juju secret does not need to be stored anywhere else.
 
 ### Errors and Status
@@ -140,8 +144,9 @@ followers wait until the secret exists.
 * Raise typed exceptions at the edges; `charm.py` maps them to statuses.
 * Set status declaratively in `collect-unit-status`; each part of the charm
 contributes its status, and ops reports the highest priority.
-* Invalid configuration is `BlockedStatus`. Waiting on another unit,
-relation, or secret is `WaitingStatus`. Reserve error states for serious
+* Invalid configuration or a missing required relation is `BlockedStatus`:
+the operator must act. Waiting on another unit, or on data or a secret from
+an existing relation, is `WaitingStatus`. Reserve error states for serious
 failures; do not let a charm flip between error and active.
 * An "already exists" error from a create call is success only when the
 existing resource matches the desired one. If it differs and the charm owns

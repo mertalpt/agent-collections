@@ -26,8 +26,6 @@ category; do not mix categories in one document, propose a split instead.
 | Reference   | `docs/reference/`   | Technical descriptions                                   |
 | Explanation | `docs/explanation/` | Context and background for the bigger picture            |
 
-Follow the repository's existing structure where it differs.
-
 ## Tutorials
 
 A tutorial usually walks the user through a basic deployment of the charm. It

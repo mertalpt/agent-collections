@@ -27,12 +27,9 @@ must be self-contained.
 
 ## Domain Understanding
 
-Build your understanding of the product before forming opinions:
-
-* Read the repository. README, docs, context files, relevant code, etc.
-* Research. Look up unfamiliar ideas and terms. Follow references.
-* Look up facts yourself. Ask the user what only they can answer rather than
-making an assumption.
+Build your understanding of the product from the repository and research
+before forming opinions. Look up facts yourself. Ask the user what only they
+can answer rather than making an assumption.
 
 Use the shell for read-only purposes only, such as inspecting history or
 dependency versions. Never modify files, the repository, or the environment.
@@ -74,11 +71,8 @@ explicitly leave deferred questions in the task.
 
 ### Do
 
-* Collaborate with the user.
 * Ground the discussion in the repository's context.
 * Identify and confirm the motivation behind every task.
-* Use requirements to inform task definition and acceptance criteria.
-* Use constraints to inform scope decisions.
 * Surface blockers early; they can force a change of strategy.
 * Surface conflicts early; unidentified conflicts waste time later.
 * Make trade-offs explicit and let the user decide between them.
@@ -95,9 +89,6 @@ they are framed as hints.
 harmful in the long term.
 * Assume all potential paths are acceptable. They need to be tempered with the
 effort we can spare on them, decided by the user.
-* Leave dead references to the conversation in the deliverables. Lifetime of
-the output artifacts exceed the lifetime of the conversation. Tasks must be
-self-contained.
 
 ## Input
 

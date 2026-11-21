@@ -31,14 +31,10 @@ with you.
 
 ## Domain Understanding
 
-Build your understanding of the product before forming opinions:
-
-* Read the input task(s).
-* Read the repository. README, docs, context files, relevant code, history,
-etc.
-* Research. Look up unfamiliar ideas and terms. Follow references.
-* Look up facts yourself. Ask the user what only they can answer rather than
-making an assumption.
+Build your understanding of the product from the input task(s), the
+repository and its history, and research before forming opinions. Look up
+facts yourself. Ask the user what only they can answer rather than making an
+assumption.
 
 Use the shell for read-only purposes only, such as inspecting history or
 dependency versions. Never modify files, the repository, or the environment.
@@ -149,7 +145,6 @@ You are done when the user accepts a complete specification.
 
 ### Do
 
-* Collaborate with the user.
 * Ground the discussion in the input task(s) and the repository's context.
 * Surface blockers and conflicts early; they may indicate the task needs to be
 redefined.
@@ -173,9 +168,6 @@ to the next stage.
 Redefinition.
 * Cut corners. We want to deliver while maintaining long term health of the
 product.
-* Leave dead references to the conversation in the deliverables. Lifetime of
-the output artifacts exceed the lifetime of the conversation. Specifications
-must be self-contained.
 
 ## Input
 

@@ -6,8 +6,7 @@ description: "Run, reproduce, or debug one Juju charm integration test module lo
 # Run a Juju integration test module
 
 Integration modules deploy real applications and may take more than 20 minutes. Treat this
-skill as a discovery workflow, not as a repository specification. Run one module per process. Do
-not run an entire integration suite unless the user explicitly requests it.
+skill as a discovery workflow, not as a repository specification. Run one module per process.
 
 Repository instructions and executable configuration take precedence over examples in this skill.
 Treat documented repository commands as strong candidates. Inspect composite commands before
@@ -17,8 +16,7 @@ before adapting it; do not repeatedly retry the assumption.
 ## 1. Read the repository contract
 
 Start at the repository root. Read `CONTRIBUTING.md` first, then the integration-testing sections
-of `README.md`, relevant `Makefile` targets, and `tox.ini`. Also honor repository instruction files
-already supplied to the agent.
+of `README.md`, relevant `Makefile` targets, and `tox.ini`.
 
 Use source as the final authority for current behavior:
 
@@ -34,8 +32,7 @@ executable configuration unless doing so would be destructive or would broaden t
 
 ## 2. Select exactly one module and environment
 
-Choose a concrete `tests/integration/test_*.py` module. List tox environments dynamically with
-`tox list`; never rely on a remembered environment list.
+Choose a concrete `tests/integration/test_*.py` module.
 
 Prefer a per-module environment whose expanded command names that file. Confirm it before running:
 
@@ -43,9 +40,8 @@ Prefer a per-module environment whose expanded command names that file. Confirm 
 tox c -e <environment> -k commands set_env pass_env
 ```
 
-`tox c` prints tox's resolved configuration, `-e` selects one environment, and `-k` limits the
-output to its command and environment-variable settings. This reveals parameter expansion such as
-the concrete test file behind `{env:TEST_FILE}` without running the environment.
+This shows the resolved command and environment settings, such as the concrete test file behind
+`{env:TEST_FILE}`, without running the environment.
 
 Environment naming is not uniform. A file such as `test_trino_catalog.py` may map to
 `integration-trino-catalog`, another alias, or no dedicated environment at all. If there is no
@@ -73,9 +69,6 @@ For every required option:
 3. Find the repository-supported way to produce its value in `CONTRIBUTING.md`, `Makefile`, helper
    scripts, or CI workflow.
 4. Verify each referenced artifact or OCI image exists before starting the long run.
-
-Make targets may be run. Before running one for the first time, read its recipe, prerequisites,
-variables, and side effects; running it needs the same permission as running its steps.
 
 A repository may have zero, one, or several rock resources, may use remote images, or may build the
 charm inside a fixture. Do not assume that familiar targets such as `build-charm`, `build-rock`, or
@@ -138,9 +131,9 @@ INTEGRATION_MAX_LOAD_PER_CPU=0.70 \
 ```
 
 The memory threshold is an admission floor, not a prediction that a module uses exactly 10 GiB.
-Normalized load makes the CPU rule portable across machines: a load of 12 on 16 logical CPUs is
-`0.75`. If the helper declines an additional run, continue with the active run rather than forcing
-parallelism. Override the gate only at the user's direction.
+Normalized load makes the CPU rule portable across machines. If the helper declines an additional
+run, continue with the active run rather than forcing parallelism. Override the gate only at the
+user's direction.
 
 ## 7. Observe without imposing a short timeout
 
