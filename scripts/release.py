@@ -483,14 +483,29 @@ def check_pr(git: Git, base: str, head: str, title: str) -> list[str]:
 
     # Base coverage catches files of collections the PR deletes.
     covered = sorted({f for f in git.diff_names(base, head) for c in collections if c.covers(f)})
+    # Version bumps aren't content: release PRs are chores, and graduations may be feat or fix.
+    bumped = [f for f in covered if is_version_bump(repo, base, head, f)]
+    covered = [f for f in covered if f not in bumped]
     if commit and covered and commit.type == "chore":
         errors.append(f"PR changes collection content ({', '.join(covered)}), so its type must be feat or fix.")
-    if commit and not covered and commit.type != "chore":
+    if commit and not covered and not bumped and commit.type != "chore":
         errors.append("PR changes no collection content, so its type must be chore.")
 
     for name, collection in repo.collections(head).items():
         errors.extend(check_collection(git, head, name, collection))
     return errors
+
+
+def is_version_bump(repo: Repo, base: str, head: str, path: str) -> bool:
+    """Returns whether `path` is an `apm.yml` whose only change is its `version`."""
+    match = APM_YML_RE.match(path)
+    if not match:
+        return False
+    before = repo.collections(base).get(match[1])
+    after = repo.collections(head).get(match[1])
+    if before is None or after is None:
+        return False
+    return {**before.data, "version": None} == {**after.data, "version": None}
 
 
 def check_collection(git: Git, rev: str, name: str, collection: Collection) -> list[str]:

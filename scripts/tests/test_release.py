@@ -205,6 +205,29 @@ class CheckPrTest(unittest.TestCase):
         self.assertTrue(release.check_pr(repo.git, base, head, "feat: update template"))
         self.assertEqual(release.check_pr(repo.git, base, head, "chore: update template"), [])
 
+    def test_version_bump_allows_any_type(self):
+        """A PR changing only a collection's version may be a chore, feat or fix."""
+        # GIVEN a PR that changes only `common`'s version, like the release PR.
+        repo = common_repo(self)
+        base = repo.git.rev_parse("HEAD")
+        head = repo.set_common_version("0.2.0", "wip")
+
+        # WHEN/THEN the release PR's chore title and a graduation's feat! title both pass.
+        self.assertEqual(release.check_pr(repo.git, base, head, "chore(release): common 0.2.0"), [])
+        self.assertEqual(release.check_pr(repo.git, base, head, "feat!: declare common stable"), [])
+
+    def test_version_bump_with_content_requires_feat_or_fix(self):
+        """A PR changing a version and other `apm.yml` fields can't be a chore."""
+        # GIVEN a PR that changes `common`'s version and its dependencies.
+        repo = common_repo(self)
+        base = repo.git.rev_parse("HEAD")
+        repo.write("collections/common/apm.yml", apm_yml("common", "0.2.0", [".apm/skills/to-file"]))
+        head = repo.commit("wip")
+
+        # WHEN/THEN a chore title fails and a feat title passes.
+        self.assertTrue(release.check_pr(repo.git, base, head, "chore: bump common"))
+        self.assertEqual(release.check_pr(repo.git, base, head, "feat: bump common"), [])
+
     def test_deleting_a_collection_is_covered_at_base(self):
         """Deleting a collection counts as a covered change."""
         # GIVEN a PR that deletes the `foo` collection.
