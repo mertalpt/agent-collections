@@ -1,0 +1,13 @@
+name: agent-collections-dev
+version: 0.0.0
+description: Collections used to develop this repository. Install with `apm install --root ..` from this directory.
+author: Mert Alp Taytak
+license: MIT
+targets:
+- claude
+- copilot
+dependencies:
+  apm:
+  - mertalpt/agent-collections/collections/common#common-v0.2.0
+  - mertalpt/agent-collections/collections/python#python-v0.1.0
+  mcp: []

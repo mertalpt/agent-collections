@@ -1,3 +1,10 @@
 .workshop.lock
 apm_modules/
 *.pyc
+# Deployed by `apm install` from `dev/`.
+.agents/
+.claude/agents/
+.claude/rules/
+.claude/skills/
+.github/agents/
+.github/instructions/
