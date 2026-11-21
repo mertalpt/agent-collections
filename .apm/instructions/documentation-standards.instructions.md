@@ -63,6 +63,8 @@ and keep its sections.
 heading and guidance define it. A "Test instructions" section tells a
 reviewer how to test the change; it is not a report of how you tested it.
 When a section's purpose is unclear, it is the user's decision.
+* **Agent instruction:** state each rule with its scope and its reason, so
+an agent can tell where it holds. A rule without either reads as universal.
 * **Decision record:** why the system is shaped as it is. The decision body is
 immutable. A correction to a still-valid decision is a dated append; a
 refinement or reversal is a new record that marks the old one as superseded.

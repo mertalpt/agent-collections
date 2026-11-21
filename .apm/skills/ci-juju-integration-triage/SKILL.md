@@ -1,7 +1,6 @@
 ---
 name: ci-juju-integration-triage
 description: "Extract the root cause from Juju charm integration-test runs in GitHub Actions. Use when given a GitHub Actions job or run URL, or asked why a charm's tox, pytest, or Juju integration CI failed."
-disable-model-invocation: true
 ---
 
 # Juju integration CI triage

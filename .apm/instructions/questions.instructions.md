@@ -22,7 +22,10 @@ yourself, keep a list of them, and report the list at the end of the work.
 Ask in plain text, then end your turn and wait.
 * Give each question a stable identifier and a bold title, e.g.
 `**Q1. Retry policy**`, so the user can answer by identifier. Keep identifiers
-stable across rounds; do not renumber open questions.
+stable across rounds: do not renumber open questions or reuse closed ones.
+* Put a question about a specific part of your reply, such as a proposal or
+a review item, directly under that part, so the user can answer with its
+context in view. Put other questions at the end.
 * Give each question the context needed to answer it without a follow-up, and
 your recommended answer.
 * Ask 3 questions per round by default, and up to 5 only when they are quick
@@ -36,5 +39,6 @@ the user answers with a question of their own.
 * New questions may join open ones within the per-round limit. When a
 question is still open after a follow-up, ask it alone until it is
 resolved.
-* While questions remain open, list them at the end of your reply with their
-full text.
+* While questions remain open, list them at the end of your reply: by
+identifier when the full text is under its item in the same reply, in full
+otherwise.

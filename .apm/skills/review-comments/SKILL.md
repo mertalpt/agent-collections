@@ -71,6 +71,8 @@ _<path:line, or "review" or "top-level"> · <link> · related: R4, R9_
 
 **Summary:** <what the comment says or asks>
 <fields for the label>
+
+> **R<n>:** <question for the user, if any>
 ```
 
 Fields that follow the summary, by label:

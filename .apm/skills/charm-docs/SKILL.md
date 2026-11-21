@@ -4,7 +4,6 @@ description: >-
   Write or review user documentation for a Juju charm under `docs/`, following
   the Diataxis framework. Use when asked to write, restructure, or review
   charm documentation.
-disable-model-invocation: true
 ---
 
 Charm documentation describes a stable target. Work against committed
