@@ -20,7 +20,7 @@ Format: `<type>[(<scope>)][!]: <subject>`
 | `fix` | Corrected behavior in a collection | patch bump |
 | `chore` | Anything outside collection content: CI, scripts, docs, config | none |
 
-- **Type rule:** if a PR changes any file covered by a collection (see below), its type must be `feat` or `fix`. Otherwise it must be `chore`. CI enforces this.
+- **Type rule:** if a PR changes any file covered by a collection (see below), its type must be `feat` or `fix`. Otherwise it must be `chore`. A change to only the `version` in an `apm.yml` (a release PR or a graduation) may use any type. CI enforces this.
 - **Scope** is optional but preferred. Use the primitive's name, e.g. `feat(to-file): …`.
 - **Breaking changes** add `!` after the type or scope, e.g. `feat(to-file)!: …`. Only `feat` and `fix` can be breaking.
 - **Subjects** are written for whoever installs the collection: say what changed for them, not how it was done. They become release notes as-is.
