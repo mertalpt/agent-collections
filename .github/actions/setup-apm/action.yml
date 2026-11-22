@@ -4,10 +4,10 @@ description: Install a pinned, checksum-verified APM CLI on a Linux x86_64 runne
 inputs:
   version:
     description: APM release version, without the leading "v".
-    default: 0.33.0
+    default: 0.37.0
   sha256:
     description: SHA-256 of apm-linux-x86_64.tar.gz for that version.
-    default: e6374402c74318f7c8bef97a90d8572d049fdab0dc3871492c6b0647ae9e881f
+    default: 04f9509f1d879e8814907b67cbcd33a2f12e4556cdb18a49062a241ce1aff7b9
 
 runs:
   using: composite

@@ -8,6 +8,6 @@ targets:
 - copilot
 dependencies:
   apm:
-  - mertalpt/agent-collections/collections/common#common-v0.2.0
+  - mertalpt/agent-collections/collections/common#common-v0.3.1
   - mertalpt/agent-collections/collections/python#python-v0.1.0
   mcp: []

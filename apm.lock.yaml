@@ -1,17 +1,24 @@
-lockfile_version: '1'
-apm_version: 0.33.0
+lockfile_version: '4'
+apm_version: 0.37.0
+manifest_targets:
+- claude
+- copilot
 dependencies:
 - repo_url: mertalpt/agent-collections
   name: common
   host: github.com
-  resolved_commit: 5d5dad466a7d14f80c6e52ec90c02a555b701b6c
-  resolved_ref: common-v0.2.0
-  version: 0.2.0
+  resolved_commit: 307557d22df041357520bac1415a78d4b1e48784
+  resolved_ref: common-v0.3.1
+  version: 0.3.1
   virtual_path: collections/common
   is_virtual: true
   package_type: apm_package
-  content_hash: sha256:929c92fa2abb3a4aba71d767a58f0c3914684dbf2b7dfad034e91a86eb0348b6
+  content_hash: sha256:651472ebb35149b71b61ccd10bbbaf6468742ca15ddb20c50545e6e408679ef6
   declared_license: MIT
+  carried_licenses:
+  - path: LICENSE.md
+    source: LICENSE.md
+    hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
 - repo_url: mertalpt/agent-collections
   name: python
   host: github.com
@@ -21,62 +28,59 @@ dependencies:
   virtual_path: collections/python
   is_virtual: true
   package_type: apm_package
-  content_hash: sha256:7025d37a7e99f92f9aef301bc100020c141fa6e5fafa6987c9dd0e792965f89e
+  content_hash: sha256:47e0ab83a2820ece17c98951864db7e7af87ca2cca7f9e846c03c5ed19d06af9
   declared_license: MIT
 - repo_url: mertalpt/agent-collections
   name: agent-collections-product-owner
   host: github.com
-  resolved_commit: 5d5dad466a7d14f80c6e52ec90c02a555b701b6c
-  resolved_ref: common-v0.2.0
+  resolved_commit: 307557d22df041357520bac1415a78d4b1e48784
+  resolved_ref: common-v0.3.1
   version: 1.0.0
   virtual_path: .apm/agents/product-owner.agent.md
   is_virtual: true
   depth: 2
   resolved_by: mertalpt/agent-collections
-  package_type: apm_package
   deployed_files:
   - .claude/agents/product-owner.md
   - .github/agents/product-owner.agent.md
   deployed_file_hashes:
-    .claude/agents/product-owner.md: sha256:40158ebb00388e207a2c6820c82fd9b71e289c54fe53bd558bd65b35adfdc532
-    .github/agents/product-owner.agent.md: sha256:40158ebb00388e207a2c6820c82fd9b71e289c54fe53bd558bd65b35adfdc532
-  content_hash: sha256:a3c9c652da446c73f755397ffed8270304f6401a728d74df8b7a10691bd47180
+    .claude/agents/product-owner.md: sha256:c4981c4b404f2a86df2878c89a7391c852e825ae2a54babeb2724108482ce266
+    .github/agents/product-owner.agent.md: sha256:c4981c4b404f2a86df2878c89a7391c852e825ae2a54babeb2724108482ce266
+  content_hash: sha256:00cc7ba4d12ee390ca79504988c34300bf869251d4f88f62e70d3980ff4b59eb
 - repo_url: mertalpt/agent-collections
   name: agent-collections-software-architect
   host: github.com
-  resolved_commit: 5d5dad466a7d14f80c6e52ec90c02a555b701b6c
-  resolved_ref: common-v0.2.0
+  resolved_commit: 307557d22df041357520bac1415a78d4b1e48784
+  resolved_ref: common-v0.3.1
   version: 1.0.0
   virtual_path: .apm/agents/software-architect.agent.md
   is_virtual: true
   depth: 2
   resolved_by: mertalpt/agent-collections
-  package_type: apm_package
   deployed_files:
   - .claude/agents/software-architect.md
   - .github/agents/software-architect.agent.md
   deployed_file_hashes:
-    .claude/agents/software-architect.md: sha256:51782ce1d47ac7c43702556485d45e88c8b6aa17ba0eb0792eba345957b63cd9
-    .github/agents/software-architect.agent.md: sha256:51782ce1d47ac7c43702556485d45e88c8b6aa17ba0eb0792eba345957b63cd9
-  content_hash: sha256:bb5f376f99bdeddb070e57fef308c8c7660968d2ec3f074496d8afe58f205903
+    .claude/agents/software-architect.md: sha256:42439381b9e1cbed29cfb22c34531cc9e0cb22eef53efd7ca7836850be9e1f4e
+    .github/agents/software-architect.agent.md: sha256:42439381b9e1cbed29cfb22c34531cc9e0cb22eef53efd7ca7836850be9e1f4e
+  content_hash: sha256:0188ae4bc5de5a2c4f3b6ff788a65c9f8375153933092bab222b7851554fcfb7
 - repo_url: mertalpt/agent-collections
   name: agent-collections-documentation-standards
   host: github.com
-  resolved_commit: 5d5dad466a7d14f80c6e52ec90c02a555b701b6c
-  resolved_ref: common-v0.2.0
+  resolved_commit: 307557d22df041357520bac1415a78d4b1e48784
+  resolved_ref: common-v0.3.1
   version: 1.0.0
   virtual_path: .apm/instructions/documentation-standards.instructions.md
   is_virtual: true
   depth: 2
   resolved_by: mertalpt/agent-collections
-  package_type: apm_package
   deployed_files:
   - .claude/rules/documentation-standards.md
   - .github/instructions/documentation-standards.instructions.md
   deployed_file_hashes:
-    .claude/rules/documentation-standards.md: sha256:a94874f4592327bdc3299fbe14fb052059f12a783b361019468b92b0ce844f71
-    .github/instructions/documentation-standards.instructions.md: sha256:7b014d0c4671e2428615675b03182962c2eaf4b7e8443e74e9573dea5d80eb8c
-  content_hash: sha256:7b30913445b31cdc59b598b8642bd10bd653b5aca60550156790e2037515b6ef
+    .claude/rules/documentation-standards.md: sha256:e4074757d1902fbe1ad964082d06cff1bb1d51fc0ca161cb33f40673c8d5a43c
+    .github/instructions/documentation-standards.instructions.md: sha256:72ea1aa49bafbf9b06f09a2f62a601247056a5ba6d35e8cddf563d9ecf9e59c8
+  content_hash: sha256:8a45cbc4b491ece13bdf5e7dbbd3227f8e5c02996fe4e08bb9537a481193ef12
 - repo_url: mertalpt/agent-collections
   name: agent-collections-python-code
   host: github.com
@@ -94,7 +98,7 @@ dependencies:
   deployed_file_hashes:
     .claude/rules/python-code.md: sha256:a8985ef247a6c327bd93e7c73b23729c8cfa96e6ca72d6852dc3b82c0822616c
     .github/instructions/python-code.instructions.md: sha256:0f8c43942207bb2420e35236250d2b0576de7899f97dd24225922b5d713e8ad5
-  content_hash: sha256:5935d49c1d3670334cc5c6e341ec6d861bc9766434f6e369e58ae67bfbca8de5
+  content_hash: sha256:24281f0607da1a60c938145690735426085482a8b463d04085685edd05d46f5c
 - repo_url: mertalpt/agent-collections
   name: agent-collections-python-tooling
   host: github.com
@@ -112,84 +116,80 @@ dependencies:
   deployed_file_hashes:
     .claude/rules/python-tooling.md: sha256:b690720588927d521180b270094b5e612fafa5479d5533c2ce79e3e2e3296e0a
     .github/instructions/python-tooling.instructions.md: sha256:562370816ac2e4f04b3e20f42463f00a4df6a257ca4b3aeae669d588d4bf7cc0
-  content_hash: sha256:ef9b989eda133d8f662b994fead71135021e8252f5d74d429fdd33a54d288182
+  content_hash: sha256:d6c0b0535a83d042f258f0b0b13b4999cb8eba4f1bfc43e2b5a379548a3963b5
 - repo_url: mertalpt/agent-collections
   name: agent-collections-questions
   host: github.com
-  resolved_commit: 5d5dad466a7d14f80c6e52ec90c02a555b701b6c
-  resolved_ref: common-v0.2.0
+  resolved_commit: 307557d22df041357520bac1415a78d4b1e48784
+  resolved_ref: common-v0.3.1
   version: 1.0.0
   virtual_path: .apm/instructions/questions.instructions.md
   is_virtual: true
   depth: 2
   resolved_by: mertalpt/agent-collections
-  package_type: apm_package
   deployed_files:
   - .claude/rules/questions.md
   - .github/instructions/questions.instructions.md
   deployed_file_hashes:
-    .claude/rules/questions.md: sha256:06045a113fa1420d8924f26317a5aa5dd641c4f4c20801e34772463acc226d51
-    .github/instructions/questions.instructions.md: sha256:3f685d0f2d020608573f62bdf24b02653cab922889cec5b47665ff6b1b90f4d1
-  content_hash: sha256:07402779ddcce2212283787fa4a78b730950cf3e5852242c2f69ebc7e2d1f942
+    .claude/rules/questions.md: sha256:0990597c64b9cd7112ea42ec76a8365e0d7b461720de312cef12668f447338e2
+    .github/instructions/questions.instructions.md: sha256:58753245e84e5633cb7705b75ee450968515f41366eb805fccc9a4f700fee7b6
+  content_hash: sha256:f82a226b1ccd12281762f250ebe0b7d645102a3b483db7c3ef1842ef584d833c
 - repo_url: mertalpt/agent-collections
   name: agent-collections-secrets
   host: github.com
-  resolved_commit: 5d5dad466a7d14f80c6e52ec90c02a555b701b6c
-  resolved_ref: common-v0.2.0
+  resolved_commit: 307557d22df041357520bac1415a78d4b1e48784
+  resolved_ref: common-v0.3.1
   version: 1.0.0
   virtual_path: .apm/instructions/secrets.instructions.md
   is_virtual: true
   depth: 2
   resolved_by: mertalpt/agent-collections
-  package_type: apm_package
   deployed_files:
   - .claude/rules/secrets.md
   - .github/instructions/secrets.instructions.md
   deployed_file_hashes:
     .claude/rules/secrets.md: sha256:5f4d623ca238b91b19ffc3bc56d5dd75db1f7b8b42c63c1ce32de2fc2ec4c376
     .github/instructions/secrets.instructions.md: sha256:6fb681797bc81a5d9a64473b23983236e67986cb2fa647f447b2fc664683dc68
-  content_hash: sha256:551139e90ab1c0c70f496eeb6045b7ee7f7d168d3a4ff575e3ce3d1035092a1f
+  content_hash: sha256:e41acea7b850c8c8410c316d23bb20741819a7622676c5e3e4606fe78dbeccee
 - repo_url: mertalpt/agent-collections
   name: agent-collections-testing
   host: github.com
-  resolved_commit: 5d5dad466a7d14f80c6e52ec90c02a555b701b6c
-  resolved_ref: common-v0.2.0
+  resolved_commit: 307557d22df041357520bac1415a78d4b1e48784
+  resolved_ref: common-v0.3.1
   version: 1.0.0
   virtual_path: .apm/instructions/testing.instructions.md
   is_virtual: true
   depth: 2
   resolved_by: mertalpt/agent-collections
-  package_type: apm_package
   deployed_files:
   - .claude/rules/testing.md
   - .github/instructions/testing.instructions.md
   deployed_file_hashes:
     .claude/rules/testing.md: sha256:48043ff86da1a84e60c08bd254a4dc0ae43f4331c9976a4beee6e7b7d4894489
     .github/instructions/testing.instructions.md: sha256:4ff58d51f0eda0c93aceaf39c7200e4e2959536aea8878de5d5d5627942b0e83
-  content_hash: sha256:0c95cd584a7bdca5dd6ea93143b8f8f0055d1cc4cc64093e15e9c5da53c4d2f4
+  content_hash: sha256:8d5adbcc8c4ebc1e9bdeab63f4d27b7f72b5a9a5d14874ba830b930e175a76be
 - repo_url: mertalpt/agent-collections
   name: agent-collections-working-agreement
   host: github.com
-  resolved_commit: 5d5dad466a7d14f80c6e52ec90c02a555b701b6c
-  resolved_ref: common-v0.2.0
+  resolved_commit: 307557d22df041357520bac1415a78d4b1e48784
+  resolved_ref: common-v0.3.1
   version: 1.0.0
   virtual_path: .apm/instructions/working-agreement.instructions.md
   is_virtual: true
   depth: 2
   resolved_by: mertalpt/agent-collections
-  package_type: apm_package
   deployed_files:
   - .claude/rules/working-agreement.md
   - .github/instructions/working-agreement.instructions.md
   deployed_file_hashes:
     .claude/rules/working-agreement.md: sha256:bcfd5011d160b30447fa8dd5913757255811c6878463119b81b7912e7f79ee42
     .github/instructions/working-agreement.instructions.md: sha256:2844a1b747c7ac83349fa1ea5015a98c505318647136ab98a36814195efeadd9
-  content_hash: sha256:122258c9bf6357be97c3dd4cd06112bb614f3c40085f41f5a5cc4095014464da
+  content_hash: sha256:c3b7be518fb6a9527032f17eaa867518ff85cb649f9a6986c6d903c60e48728c
 - repo_url: mertalpt/agent-collections
   name: brief
   host: github.com
-  resolved_commit: 5d5dad466a7d14f80c6e52ec90c02a555b701b6c
-  resolved_ref: common-v0.2.0
+  resolved_commit: 307557d22df041357520bac1415a78d4b1e48784
+  resolved_ref: common-v0.3.1
   version: unknown
   virtual_path: .apm/skills/brief
   is_virtual: true
@@ -198,18 +198,26 @@ dependencies:
   package_type: claude_skill
   deployed_files:
   - .agents/skills/brief
+  - .agents/skills/brief/LICENSE.md
   - .agents/skills/brief/SKILL.md
   - .claude/skills/brief
+  - .claude/skills/brief/LICENSE.md
   - .claude/skills/brief/SKILL.md
   deployed_file_hashes:
+    .agents/skills/brief/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
     .agents/skills/brief/SKILL.md: sha256:754677173184efae363c91f04adc8c08c4681e3a60c27f993f6b829f0ee9a4ac
+    .claude/skills/brief/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
     .claude/skills/brief/SKILL.md: sha256:754677173184efae363c91f04adc8c08c4681e3a60c27f993f6b829f0ee9a4ac
-  content_hash: sha256:dc039ff475d65a438610eafed0b7c08400164595ff39940d53121ca7f2fa4bc3
+  content_hash: sha256:769385dea5e21ddf9e2619c582131551a618602bd0d88a10196f7c54fdad44a6
+  carried_licenses:
+  - path: LICENSE.md
+    source: LICENSE.md
+    hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
 - repo_url: mertalpt/agent-collections
   name: interview
   host: github.com
-  resolved_commit: 5d5dad466a7d14f80c6e52ec90c02a555b701b6c
-  resolved_ref: common-v0.2.0
+  resolved_commit: 307557d22df041357520bac1415a78d4b1e48784
+  resolved_ref: common-v0.3.1
   version: unknown
   virtual_path: .apm/skills/interview
   is_virtual: true
@@ -218,18 +226,26 @@ dependencies:
   package_type: claude_skill
   deployed_files:
   - .agents/skills/interview
+  - .agents/skills/interview/LICENSE.md
   - .agents/skills/interview/SKILL.md
   - .claude/skills/interview
+  - .claude/skills/interview/LICENSE.md
   - .claude/skills/interview/SKILL.md
   deployed_file_hashes:
+    .agents/skills/interview/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
     .agents/skills/interview/SKILL.md: sha256:e008845bb356137b32a3af7b17444c4f4ff577ff0319555ddb7a06645d952f3b
+    .claude/skills/interview/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
     .claude/skills/interview/SKILL.md: sha256:e008845bb356137b32a3af7b17444c4f4ff577ff0319555ddb7a06645d952f3b
-  content_hash: sha256:1856686d27ae3dc2c7b769faa251b734f60e1ffb96d8a1bee1fc5a9086ebcd8b
+  content_hash: sha256:423e9a96b26d96f8355edd855f91fe31d5923b59faaddbcabc65b1f39459fe6e
+  carried_licenses:
+  - path: LICENSE.md
+    source: LICENSE.md
+    hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
 - repo_url: mertalpt/agent-collections
   name: recursive-self-improvement
   host: github.com
-  resolved_commit: 5d5dad466a7d14f80c6e52ec90c02a555b701b6c
-  resolved_ref: common-v0.2.0
+  resolved_commit: 307557d22df041357520bac1415a78d4b1e48784
+  resolved_ref: common-v0.3.1
   version: unknown
   virtual_path: .apm/skills/recursive-self-improvement
   is_virtual: true
@@ -238,18 +254,26 @@ dependencies:
   package_type: claude_skill
   deployed_files:
   - .agents/skills/recursive-self-improvement
+  - .agents/skills/recursive-self-improvement/LICENSE.md
   - .agents/skills/recursive-self-improvement/SKILL.md
   - .claude/skills/recursive-self-improvement
+  - .claude/skills/recursive-self-improvement/LICENSE.md
   - .claude/skills/recursive-self-improvement/SKILL.md
   deployed_file_hashes:
+    .agents/skills/recursive-self-improvement/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
     .agents/skills/recursive-self-improvement/SKILL.md: sha256:f67bfaf76c2e75ba1a91f374a056a59a1d70c718a4de8c333e6cd2a349911aa3
+    .claude/skills/recursive-self-improvement/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
     .claude/skills/recursive-self-improvement/SKILL.md: sha256:f67bfaf76c2e75ba1a91f374a056a59a1d70c718a4de8c333e6cd2a349911aa3
-  content_hash: sha256:06dc3adb59c665e48c8de84bcf31c00c3d6fe161ea1de2185f8dcee876ef7489
+  content_hash: sha256:953c238f9656ae12e46f3e5cc3b6f004d19e2100fbe5b4def834d3907894900a
+  carried_licenses:
+  - path: LICENSE.md
+    source: LICENSE.md
+    hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
 - repo_url: mertalpt/agent-collections
   name: review-comments
   host: github.com
-  resolved_commit: 5d5dad466a7d14f80c6e52ec90c02a555b701b6c
-  resolved_ref: common-v0.2.0
+  resolved_commit: 307557d22df041357520bac1415a78d4b1e48784
+  resolved_ref: common-v0.3.1
   version: unknown
   virtual_path: .apm/skills/review-comments
   is_virtual: true
@@ -258,18 +282,26 @@ dependencies:
   package_type: claude_skill
   deployed_files:
   - .agents/skills/review-comments
+  - .agents/skills/review-comments/LICENSE.md
   - .agents/skills/review-comments/SKILL.md
   - .claude/skills/review-comments
+  - .claude/skills/review-comments/LICENSE.md
   - .claude/skills/review-comments/SKILL.md
   deployed_file_hashes:
+    .agents/skills/review-comments/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
     .agents/skills/review-comments/SKILL.md: sha256:887eb55ad558730b9f569805dd147d09195f00d7640dd96a8fa9a9b5585f24d2
+    .claude/skills/review-comments/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
     .claude/skills/review-comments/SKILL.md: sha256:887eb55ad558730b9f569805dd147d09195f00d7640dd96a8fa9a9b5585f24d2
-  content_hash: sha256:c7fc201242e765ba342169a1513af53d8653d6876e9760d665154b02162e43f1
+  content_hash: sha256:bdad8f377cca5a50bbd40b3554f11717cfeb8220becfa9531230b0381358c319
+  carried_licenses:
+  - path: LICENSE.md
+    source: LICENSE.md
+    hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
 - repo_url: mertalpt/agent-collections
   name: to-file
   host: github.com
-  resolved_commit: 5d5dad466a7d14f80c6e52ec90c02a555b701b6c
-  resolved_ref: common-v0.2.0
+  resolved_commit: 307557d22df041357520bac1415a78d4b1e48784
+  resolved_ref: common-v0.3.1
   version: unknown
   virtual_path: .apm/skills/to-file
   is_virtual: true
@@ -278,13 +310,21 @@ dependencies:
   package_type: claude_skill
   deployed_files:
   - .agents/skills/to-file
+  - .agents/skills/to-file/LICENSE.md
   - .agents/skills/to-file/SKILL.md
   - .claude/skills/to-file
+  - .claude/skills/to-file/LICENSE.md
   - .claude/skills/to-file/SKILL.md
   deployed_file_hashes:
+    .agents/skills/to-file/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
     .agents/skills/to-file/SKILL.md: sha256:5f3c85c70a9d95820c16fb53c41a2d0eef4b1608302813650f74cbb172798f63
+    .claude/skills/to-file/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
     .claude/skills/to-file/SKILL.md: sha256:5f3c85c70a9d95820c16fb53c41a2d0eef4b1608302813650f74cbb172798f63
-  content_hash: sha256:c3f55ae23e847c66c4cbaad9e03fc73c4a71409c5a8a99a2314bfbed1df85a2f
+  content_hash: sha256:8109354ac4bc20250908cee916a97606b9deb51337d7022448c511ac6fd2666b
+  carried_licenses:
+  - path: LICENSE.md
+    source: LICENSE.md
+    hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
 deployments:
 - kind: project-relative
   target: claude
@@ -294,7 +334,7 @@ deployments:
   owners:
   - mertalpt/agent-collections/.apm/agents/product-owner.agent.md
   active_owner: mertalpt/agent-collections/.apm/agents/product-owner.agent.md
-  content_hash: sha256:40158ebb00388e207a2c6820c82fd9b71e289c54fe53bd558bd65b35adfdc532
+  content_hash: sha256:c4981c4b404f2a86df2878c89a7391c852e825ae2a54babeb2724108482ce266
 - kind: project-relative
   target: claude
   value: .claude/agents/software-architect.md
@@ -303,7 +343,7 @@ deployments:
   owners:
   - mertalpt/agent-collections/.apm/agents/software-architect.agent.md
   active_owner: mertalpt/agent-collections/.apm/agents/software-architect.agent.md
-  content_hash: sha256:51782ce1d47ac7c43702556485d45e88c8b6aa17ba0eb0792eba345957b63cd9
+  content_hash: sha256:42439381b9e1cbed29cfb22c34531cc9e0cb22eef53efd7ca7836850be9e1f4e
 - kind: project-relative
   target: claude
   value: .claude/rules/documentation-standards.md
@@ -312,7 +352,7 @@ deployments:
   owners:
   - mertalpt/agent-collections/.apm/instructions/documentation-standards.instructions.md
   active_owner: mertalpt/agent-collections/.apm/instructions/documentation-standards.instructions.md
-  content_hash: sha256:a94874f4592327bdc3299fbe14fb052059f12a783b361019468b92b0ce844f71
+  content_hash: sha256:e4074757d1902fbe1ad964082d06cff1bb1d51fc0ca161cb33f40673c8d5a43c
 - kind: project-relative
   target: claude
   value: .claude/rules/python-code.md
@@ -339,7 +379,7 @@ deployments:
   owners:
   - mertalpt/agent-collections/.apm/instructions/questions.instructions.md
   active_owner: mertalpt/agent-collections/.apm/instructions/questions.instructions.md
-  content_hash: sha256:06045a113fa1420d8924f26317a5aa5dd641c4f4c20801e34772463acc226d51
+  content_hash: sha256:0990597c64b9cd7112ea42ec76a8365e0d7b461720de312cef12668f447338e2
 - kind: project-relative
   target: claude
   value: .claude/rules/secrets.md
@@ -378,6 +418,15 @@ deployments:
   content_hash: null
 - kind: project-relative
   target: claude
+  value: .claude/skills/brief/LICENSE.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/brief
+  active_owner: mertalpt/agent-collections/.apm/skills/brief
+  content_hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+- kind: project-relative
+  target: claude
   value: .claude/skills/brief/SKILL.md
   runtime: null
   scope: project
@@ -394,6 +443,15 @@ deployments:
   - mertalpt/agent-collections/.apm/skills/interview
   active_owner: mertalpt/agent-collections/.apm/skills/interview
   content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/interview/LICENSE.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/interview
+  active_owner: mertalpt/agent-collections/.apm/skills/interview
+  content_hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
 - kind: project-relative
   target: claude
   value: .claude/skills/interview/SKILL.md
@@ -414,6 +472,15 @@ deployments:
   content_hash: null
 - kind: project-relative
   target: claude
+  value: .claude/skills/recursive-self-improvement/LICENSE.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/recursive-self-improvement
+  active_owner: mertalpt/agent-collections/.apm/skills/recursive-self-improvement
+  content_hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+- kind: project-relative
+  target: claude
   value: .claude/skills/recursive-self-improvement/SKILL.md
   runtime: null
   scope: project
@@ -430,6 +497,15 @@ deployments:
   - mertalpt/agent-collections/.apm/skills/review-comments
   active_owner: mertalpt/agent-collections/.apm/skills/review-comments
   content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/review-comments/LICENSE.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/review-comments
+  active_owner: mertalpt/agent-collections/.apm/skills/review-comments
+  content_hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
 - kind: project-relative
   target: claude
   value: .claude/skills/review-comments/SKILL.md
@@ -450,6 +526,15 @@ deployments:
   content_hash: null
 - kind: project-relative
   target: claude
+  value: .claude/skills/to-file/LICENSE.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/to-file
+  active_owner: mertalpt/agent-collections/.apm/skills/to-file
+  content_hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+- kind: project-relative
+  target: claude
   value: .claude/skills/to-file/SKILL.md
   runtime: null
   scope: project
@@ -466,6 +551,15 @@ deployments:
   - mertalpt/agent-collections/.apm/skills/brief
   active_owner: mertalpt/agent-collections/.apm/skills/brief
   content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/brief/LICENSE.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/brief
+  active_owner: mertalpt/agent-collections/.apm/skills/brief
+  content_hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
 - kind: project-relative
   target: copilot
   value: .agents/skills/brief/SKILL.md
@@ -486,6 +580,15 @@ deployments:
   content_hash: null
 - kind: project-relative
   target: copilot
+  value: .agents/skills/interview/LICENSE.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/interview
+  active_owner: mertalpt/agent-collections/.apm/skills/interview
+  content_hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+- kind: project-relative
+  target: copilot
   value: .agents/skills/interview/SKILL.md
   runtime: null
   scope: project
@@ -502,6 +605,15 @@ deployments:
   - mertalpt/agent-collections/.apm/skills/recursive-self-improvement
   active_owner: mertalpt/agent-collections/.apm/skills/recursive-self-improvement
   content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/recursive-self-improvement/LICENSE.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/recursive-self-improvement
+  active_owner: mertalpt/agent-collections/.apm/skills/recursive-self-improvement
+  content_hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
 - kind: project-relative
   target: copilot
   value: .agents/skills/recursive-self-improvement/SKILL.md
@@ -522,6 +634,15 @@ deployments:
   content_hash: null
 - kind: project-relative
   target: copilot
+  value: .agents/skills/review-comments/LICENSE.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/review-comments
+  active_owner: mertalpt/agent-collections/.apm/skills/review-comments
+  content_hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+- kind: project-relative
+  target: copilot
   value: .agents/skills/review-comments/SKILL.md
   runtime: null
   scope: project
@@ -540,6 +661,15 @@ deployments:
   content_hash: null
 - kind: project-relative
   target: copilot
+  value: .agents/skills/to-file/LICENSE.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/to-file
+  active_owner: mertalpt/agent-collections/.apm/skills/to-file
+  content_hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+- kind: project-relative
+  target: copilot
   value: .agents/skills/to-file/SKILL.md
   runtime: null
   scope: project
@@ -555,7 +685,7 @@ deployments:
   owners:
   - mertalpt/agent-collections/.apm/agents/product-owner.agent.md
   active_owner: mertalpt/agent-collections/.apm/agents/product-owner.agent.md
-  content_hash: sha256:40158ebb00388e207a2c6820c82fd9b71e289c54fe53bd558bd65b35adfdc532
+  content_hash: sha256:c4981c4b404f2a86df2878c89a7391c852e825ae2a54babeb2724108482ce266
 - kind: project-relative
   target: copilot
   value: .github/agents/software-architect.agent.md
@@ -564,7 +694,7 @@ deployments:
   owners:
   - mertalpt/agent-collections/.apm/agents/software-architect.agent.md
   active_owner: mertalpt/agent-collections/.apm/agents/software-architect.agent.md
-  content_hash: sha256:51782ce1d47ac7c43702556485d45e88c8b6aa17ba0eb0792eba345957b63cd9
+  content_hash: sha256:42439381b9e1cbed29cfb22c34531cc9e0cb22eef53efd7ca7836850be9e1f4e
 - kind: project-relative
   target: copilot
   value: .github/instructions/documentation-standards.instructions.md
@@ -573,7 +703,7 @@ deployments:
   owners:
   - mertalpt/agent-collections/.apm/instructions/documentation-standards.instructions.md
   active_owner: mertalpt/agent-collections/.apm/instructions/documentation-standards.instructions.md
-  content_hash: sha256:7b014d0c4671e2428615675b03182962c2eaf4b7e8443e74e9573dea5d80eb8c
+  content_hash: sha256:72ea1aa49bafbf9b06f09a2f62a601247056a5ba6d35e8cddf563d9ecf9e59c8
 - kind: project-relative
   target: copilot
   value: .github/instructions/python-code.instructions.md
@@ -600,7 +730,7 @@ deployments:
   owners:
   - mertalpt/agent-collections/.apm/instructions/questions.instructions.md
   active_owner: mertalpt/agent-collections/.apm/instructions/questions.instructions.md
-  content_hash: sha256:3f685d0f2d020608573f62bdf24b02653cab922889cec5b47665ff6b1b90f4d1
+  content_hash: sha256:58753245e84e5633cb7705b75ee450968515f41366eb805fccc9a4f700fee7b6
 - kind: project-relative
   target: copilot
   value: .github/instructions/secrets.instructions.md
