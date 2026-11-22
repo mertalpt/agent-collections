@@ -40,6 +40,7 @@ dependencies:
   is_virtual: true
   depth: 2
   resolved_by: mertalpt/agent-collections
+  package_type: apm_package
   deployed_files:
   - .claude/agents/product-owner.md
   - .github/agents/product-owner.agent.md
@@ -57,6 +58,7 @@ dependencies:
   is_virtual: true
   depth: 2
   resolved_by: mertalpt/agent-collections
+  package_type: apm_package
   deployed_files:
   - .claude/agents/software-architect.md
   - .github/agents/software-architect.agent.md
@@ -74,6 +76,7 @@ dependencies:
   is_virtual: true
   depth: 2
   resolved_by: mertalpt/agent-collections
+  package_type: apm_package
   deployed_files:
   - .claude/rules/documentation-standards.md
   - .github/instructions/documentation-standards.instructions.md
@@ -127,6 +130,7 @@ dependencies:
   is_virtual: true
   depth: 2
   resolved_by: mertalpt/agent-collections
+  package_type: apm_package
   deployed_files:
   - .claude/rules/questions.md
   - .github/instructions/questions.instructions.md
@@ -144,6 +148,7 @@ dependencies:
   is_virtual: true
   depth: 2
   resolved_by: mertalpt/agent-collections
+  package_type: apm_package
   deployed_files:
   - .claude/rules/secrets.md
   - .github/instructions/secrets.instructions.md
@@ -161,6 +166,7 @@ dependencies:
   is_virtual: true
   depth: 2
   resolved_by: mertalpt/agent-collections
+  package_type: apm_package
   deployed_files:
   - .claude/rules/testing.md
   - .github/instructions/testing.instructions.md
@@ -178,6 +184,7 @@ dependencies:
   is_virtual: true
   depth: 2
   resolved_by: mertalpt/agent-collections
+  package_type: apm_package
   deployed_files:
   - .claude/rules/working-agreement.md
   - .github/instructions/working-agreement.instructions.md
