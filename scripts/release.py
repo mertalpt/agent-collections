@@ -10,11 +10,13 @@ import re
 import subprocess
 import sys
 import tempfile
+from collections.abc import Callable
 from dataclasses import dataclass
 
 import yaml
 
 RELEASE_BRANCH = "release/pending"
+UPGRADE_BRANCH = "upgrade/dev-pins"
 MAIN_BRANCH = "main"
 
 TYPES = ("feat", "fix", "chore")
@@ -31,6 +33,15 @@ SKIPPED_MESSAGE_PREFIXES = ("Merge ", 'Revert "', "fixup! ", "squash! ", "amend!
 SEMVER_RE = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
 APM_YML_RE = re.compile(r"^collections/([^/]+)/apm\.yml$")
 VERSION_LINE_RE = re.compile(r"^version:[ \t]*\S+[ \t]*$", re.MULTILINE)
+
+DEV_MANIFEST = "dev/apm.yml"
+# Contributors install from `dev/` with `--root ..`, so the lockfile is at the repository root.
+DEV_LOCKFILE = "apm.lock.yaml"
+DEV_PIN_RE = re.compile(
+    r"^(?P<lead>[ \t]*-[ \t]+)(?P<repo>[^/\s]+/[^/\s]+)/collections/(?P<name>[^/#\s]+)"
+    r"#(?P=name)-v(?P<version>\S+?)[ \t]*$",
+    re.MULTILINE,
+)
 
 Version = tuple[int, int, int]
 
@@ -296,19 +307,23 @@ class GitHub:
             raise ReleaseError(f"gh {' '.join(args)} failed: {result.stderr.strip()}")
         return result.stdout
 
-    def find_release_pr(self) -> int | None:
-        """Returns the number of the open release PR, if any."""
+    def repo(self) -> str:
+        """Returns the repository as `owner/name`."""
+        return self._gh("repo", "view", "--json", "nameWithOwner", "--jq", ".nameWithOwner").strip()
+
+    def find_pr(self, branch: str) -> int | None:
+        """Returns the number of the open PR from `branch` to `MAIN_BRANCH`, if any."""
         out = self._gh(
-            "pr", "list", "--head", RELEASE_BRANCH, "--base", MAIN_BRANCH,
+            "pr", "list", "--head", branch, "--base", MAIN_BRANCH,
             "--state", "open", "--json", "number",
         )
         prs = json.loads(out)
         return prs[0]["number"] if prs else None
 
-    def create_pr(self, title: str, body: str) -> None:
-        """Opens the release PR from `RELEASE_BRANCH`."""
+    def create_pr(self, branch: str, title: str, body: str) -> None:
+        """Opens a PR from `branch` to `MAIN_BRANCH`."""
         self._gh(
-            "pr", "create", "--head", RELEASE_BRANCH, "--base", MAIN_BRANCH,
+            "pr", "create", "--head", branch, "--base", MAIN_BRANCH,
             "--title", title, "--body-file", "-", input=body,
         )
 
@@ -316,9 +331,9 @@ class GitHub:
         """Replaces the title and body of PR `number`."""
         self._gh("pr", "edit", str(number), "--title", title, "--body-file", "-", input=body)
 
-    def close_pr(self, number: int) -> None:
-        """Closes PR `number` and deletes its branch."""
-        self._gh("pr", "close", str(number), "--delete-branch", "--comment", "No pending releases.")
+    def close_pr(self, number: int, comment: str) -> None:
+        """Closes PR `number` with `comment` and deletes its branch."""
+        self._gh("pr", "close", str(number), "--delete-branch", "--comment", comment)
 
     def create_release(self, tag: str, notes: str) -> None:
         """Publishes a GitHub Release for an existing, pushed tag."""
@@ -640,11 +655,11 @@ def plan(git: Git, github: GitHub) -> None:
         titles.append(f"{name} {version}")
         sections.append(f"## {name} {version}\n\n{render_notes(commits)}")
 
-    number = github.find_release_pr()
+    number = github.find_pr(RELEASE_BRANCH)
     if not files and number is None:
         return
     if not files:
-        github.close_pr(number)
+        github.close_pr(number, "No pending releases.")
         print(f"Closed release PR #{number}.")
         return
 
@@ -653,11 +668,109 @@ def plan(git: Git, github: GitHub) -> None:
     commit = git.commit_files(head, files, title)
     git.push(f"{commit}:refs/heads/{RELEASE_BRANCH}", force=True)
     if number is None:
-        github.create_pr(title, body)
+        github.create_pr(RELEASE_BRANCH, title, body)
         print(f"Opened release PR: {title}")
         return
     github.edit_pr(number, title, body)
     print(f"Updated release PR #{number}: {title}")
+
+
+def dev_pins(text: str, repo: str) -> dict[str, Version]:
+    """Returns the versions `dev/apm.yml` pins this repository's collections to, by name.
+
+    Args:
+        text: The content of `dev/apm.yml`.
+        repo: This repository as `owner/name`. Pins to other repositories are ignored.
+
+    Raises:
+        ReleaseError: If a pinned version isn't in `X.Y.Z` form.
+    """
+    return {m["name"]: parse_version(m["version"]) for m in DEV_PIN_RE.finditer(text) if m["repo"] == repo}
+
+
+def set_dev_pins(text: str, repo: str, versions: dict[str, Version]) -> str:
+    """Repins this repository's collections in `versions`, keeping everything else intact.
+
+    Args:
+        text: The content of `dev/apm.yml`.
+        repo: This repository as `owner/name`.
+        versions: The new version of each collection to repin, by name.
+
+    Returns:
+        The new content.
+    """
+    def repin(m: re.Match) -> str:
+        if m["repo"] != repo or m["name"] not in versions:
+            return m[0]
+        return f"{m['lead']}{repo}/collections/{m['name']}#{tag_name(m['name'], versions[m['name']])}"
+
+    return DEV_PIN_RE.sub(repin, text)
+
+
+def install_dev(cwd: str = ".") -> None:
+    """Installs `dev/apm.yml` as contributors do, writing the lockfile at the repository root.
+
+    Args:
+        cwd: Path to the repository's working tree.
+
+    Raises:
+        ReleaseError: If `apm install` fails.
+    """
+    result = subprocess.run(
+        ["apm", "install", "--root", ".."], cwd=os.path.join(cwd, "dev"), capture_output=True, text=True
+    )
+    if result.returncode != 0:
+        raise ReleaseError(f"apm install failed: {(result.stderr or result.stdout).strip()}")
+
+
+def upgrade_dev(git: Git, github: GitHub, install: Callable[[], None]) -> None:
+    """Creates, updates or closes the upgrade PR that pins `dev/apm.yml` to the latest tags.
+
+    Args:
+        git: The repository, with `HEAD` at the pushed commit checked out.
+        github: The GitHub adapter.
+        install: Writes the lockfile in the working tree from `dev/apm.yml`.
+    """
+    head = git.rev_parse("HEAD")
+    text = git.show(head, DEV_MANIFEST)
+    repo = github.repo()
+    pins = dev_pins(text, repo)
+    upgrades = {}
+    for name, pinned in sorted(pins.items()):
+        tags = git.tags(name)
+        if tags and tags[-1] > pinned:
+            upgrades[name] = tags[-1]
+
+    number = github.find_pr(UPGRADE_BRANCH)
+    if not upgrades and number is None:
+        return
+    if not upgrades:
+        github.close_pr(number, "Dev pins are up to date.")
+        print(f"Closed upgrade PR #{number}.")
+        return
+
+    manifest = set_dev_pins(text, repo, upgrades)
+    with open(os.path.join(git.cwd, DEV_MANIFEST), "w", encoding="utf-8") as f:
+        f.write(manifest)
+    # APM 0.37.0 updating a lockfile in place writes inconsistent sub-package entries;
+    # a lockfile written from scratch matches what a fresh clone's install produces.
+    os.remove(os.path.join(git.cwd, DEV_LOCKFILE))
+    install()
+    with open(os.path.join(git.cwd, DEV_LOCKFILE), encoding="utf-8") as f:
+        lockfile = f.read()
+
+    bumps = [f"{name} {format_version(version)}" for name, version in upgrades.items()]
+    title = f"chore: upgrade dev pins to {', '.join(bumps)}"
+    lines = [f"- {name}: {format_version(pins[name])} -> {format_version(v)}" for name, v in upgrades.items()]
+    body = "Merging this PR upgrades the collections pinned in `dev/apm.yml`.\n\n" + "\n".join(lines) + "\n"
+    commit = git.commit_files(head, {DEV_MANIFEST: manifest, DEV_LOCKFILE: lockfile}, title)
+    git.push(f"{commit}:refs/heads/{UPGRADE_BRANCH}", force=True)
+    if number is None:
+        github.create_pr(UPGRADE_BRANCH, title, body)
+        print(f"Opened upgrade PR: {title}")
+        return
+    github.edit_pr(number, title, body)
+    print(f"Updated upgrade PR #{number}: {title}")
 
 
 def report(errors: list[str]) -> int:
@@ -698,6 +811,7 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("covered-files", help="List files covered by any collection at HEAD.")
     sub.add_parser("release", help="Tag collections whose version is ahead of their latest tag.")
     sub.add_parser("plan", help="Create, update or close the release PR.")
+    sub.add_parser("upgrade-dev", help="Create, update or close the PR that upgrades the dev pins.")
     args = parser.parse_args(argv)
 
     try:
@@ -710,6 +824,9 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if args.command == "release":
             return report(release(Git(), GitHub()))
+        if args.command == "upgrade-dev":
+            upgrade_dev(Git(), GitHub(), install_dev)
+            return 0
         plan(Git(), GitHub())
         return 0
     except ReleaseError as e:
