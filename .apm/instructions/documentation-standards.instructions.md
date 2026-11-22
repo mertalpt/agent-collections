@@ -93,7 +93,10 @@ an agent can tell where it holds. A rule without either reads as universal.
 * **Decision record:** why the system is shaped as it is. The decision body is
 immutable. A correction to a still-valid decision is a dated append; a
 refinement or reversal is a new record that marks the old one as superseded.
-* **Issue:** a problem or goal, not a fix.
+* **Issue:** a problem or goal, not a fix. It may list possible approaches;
+when the fix is already known, propose a pull request instead. Use the
+repository's issue template for the issue's kind when it has one, keep its
+sections, and apply its labels.
 * **Prose doc:** opens with a title and a short abstract, in a formal tone.
 * **Operational runbook:** its verbatim commands, configuration, paths, and
 output are the point; it may relax ASCII and formal tone. The why stays
