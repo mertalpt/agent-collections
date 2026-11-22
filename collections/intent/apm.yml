@@ -1,0 +1,16 @@
+name: intent
+version: 0.1.0
+description: Mutable decision records checked into the repository under `intent/`, with a pre-commit hook that keeps their history index exact. Expects the common collection.
+author: Mert Alp Taytak
+license: MIT
+targets:
+- claude
+- copilot
+dependencies:
+  apm:
+  - git: parent
+    path: .apm/instructions/intent-decisions.instructions.md
+  - git: parent
+    path: .apm/skills/intent-decisions
+  mcp: []
+includes: auto
