@@ -21,6 +21,12 @@ A new collection is tagged with its current version on the first push to `main` 
 
 `0.x` versions never reach `1.0.0` on their own.
 
+## Upgrading the dev pins
+
+[`dev/apm.yml`](../dev/apm.yml) pins the collections used to develop this repository. On every push to `main`, after tagging, the workflow compares those pins with the latest tags. If any are behind, it opens or updates one upgrade PR from the `upgrade/dev-pins` branch, titled `chore: upgrade dev pins to <name> <version>[, ...]`. The PR bumps the pins and replaces `apm.lock.yaml` with one written from scratch by `apm install --root ..`, using the APM version pinned in [`setup-apm`](../.github/actions/setup-apm/action.yml). When the pins are current, it closes the upgrade PR.
+
+Merge the upgrade PR by hand; it's a `chore` and releases nothing. It's rebuilt on every push to `main`, so don't push your own changes to its branch.
+
 ## Graduating a collection (manual version bump)
 
 Open a normal PR that sets `version` in the collection's `apm.yml`, e.g. `feat!: declare common stable` with `version: 1.0.0`. When it merges, the workflow tags it. The version must be at least what the commits since the latest tag require.

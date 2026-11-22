@@ -110,33 +110,47 @@ class TempRepo:
 
 
 class FakeGitHub:
-    """Stands in for `release.GitHub`, keeping one release PR and the published releases in memory.
+    """Stands in for `release.GitHub`, keeping open PRs and published releases in memory.
 
     Attributes:
-        pr: The open release PR as `{number, title, body}`, or None.
+        prs: Open PRs as `{number, title, body}`, by head branch.
         releases: Release notes by tag.
+        next_number: The number the next PR gets.
     """
 
     def __init__(self):
-        """Starts with no release PR and no releases."""
-        self.pr = None
+        """Starts with no PRs and no releases."""
+        self.prs = {}
         self.releases = {}
+        self.next_number = 1
 
-    def find_release_pr(self):
-        """Returns the open release PR's number, if any."""
-        return self.pr["number"] if self.pr else None
+    @property
+    def pr(self):
+        """The open release PR, or None."""
+        return self.prs.get(release.RELEASE_BRANCH)
 
-    def create_pr(self, title, body):
-        """Opens the release PR."""
-        self.pr = {"number": 1, "title": title, "body": body}
+    def repo(self):
+        """Returns the repository as `owner/name`."""
+        return "owner/repo"
+
+    def find_pr(self, branch):
+        """Returns the number of the open PR from `branch`, if any."""
+        pr = self.prs.get(branch)
+        return pr["number"] if pr else None
+
+    def create_pr(self, branch, title, body):
+        """Opens a PR from `branch`."""
+        self.prs[branch] = {"number": self.next_number, "title": title, "body": body}
+        self.next_number += 1
 
     def edit_pr(self, number, title, body):
-        """Replaces the release PR's title and body."""
-        self.pr = {"number": number, "title": title, "body": body}
+        """Replaces a PR's title and body."""
+        branch = next(b for b, pr in self.prs.items() if pr["number"] == number)
+        self.prs[branch] = {"number": number, "title": title, "body": body}
 
-    def close_pr(self, number):
-        """Closes the release PR."""
-        self.pr = None
+    def close_pr(self, number, comment):
+        """Closes a PR."""
+        self.prs = {b: pr for b, pr in self.prs.items() if pr["number"] != number}
 
     def create_release(self, tag, notes):
         """Records a published release."""
@@ -448,6 +462,97 @@ class ReleaseTest(unittest.TestCase):
             "### Breaking Changes\n- declare the collection stable (#8)\n### Fixes\n- **to-file:** x (#7)",
         )
         self.assertIsNone(github.pr)
+
+
+class DevPinsTest(unittest.TestCase):
+    """Tests for reading and rewriting the pins in `dev/apm.yml`."""
+
+    TEXT = (
+        "dependencies:\n"
+        "  apm:\n"
+        "  - owner/repo/collections/common#common-v0.3.1\n"
+        "  # A comment that must survive pin edits.\n"
+        "  - owner/repo/collections/python#python-v0.1.0\n"
+        "  - other/repo/collections/common#common-v0.1.0\n"
+    )
+
+    def test_repins_only_the_given_collections_of_this_repository(self):
+        """Pins to other repositories, unlisted pins and other lines are kept as they are."""
+        # WHEN `common` is repinned to 0.4.0.
+        text = release.set_dev_pins(self.TEXT, "owner/repo", {"common": (0, 4, 0)})
+
+        # THEN only this repository's `common` pin changes.
+        self.assertEqual(release.dev_pins(text, "owner/repo"), {"common": (0, 4, 0), "python": (0, 1, 0)})
+        self.assertEqual(release.dev_pins(text, "other/repo"), {"common": (0, 1, 0)})
+        self.assertEqual(text, self.TEXT.replace("common#common-v0.3.1", "common#common-v0.4.0"))
+
+
+class UpgradeDevTest(unittest.TestCase):
+    """Tests for `upgrade_dev` against a fake GitHub and a fake `apm install`."""
+
+    def setUp(self):
+        """Creates a repository whose `dev/apm.yml` pins `common` to its only tag, 0.1.0."""
+        self.repo = common_repo(self)
+        self.repo.write("dev/apm.yml", "dependencies:\n  apm:\n  - owner/repo/collections/common#common-v0.1.0\n")
+        self.repo.write("apm.lock.yaml", "stale\n")
+        self.repo.commit("chore: pin common for development")
+        self.repo.tag("common-v0.1.0")
+        self.github = FakeGitHub()
+        self.installs = 0
+
+    def install(self):
+        """Writes a lockfile from `dev/apm.yml`, failing if the old lockfile is still there."""
+        lockfile = os.path.join(self.repo.path, "apm.lock.yaml")
+        self.assertFalse(os.path.exists(lockfile), "the lockfile must be regenerated from scratch")
+        with open(os.path.join(self.repo.path, "dev/apm.yml"), encoding="utf-8") as f:
+            manifest = f.read()
+        with open(lockfile, "w", encoding="utf-8") as f:
+            f.write(f"installed from:\n{manifest}")
+        self.installs += 1
+
+    def upgrade_dev(self):
+        """Runs `upgrade_dev` and returns the open upgrade PR, or None."""
+        release.upgrade_dev(self.repo.git, self.github, self.install)
+        return self.github.prs.get(release.UPGRADE_BRANCH)
+
+    def test_opens_updates_and_closes_one_upgrade_pr(self):
+        """Each new tag updates the same PR, and the PR closes once the pins are current."""
+        # GIVEN pins that are current.
+        # WHEN/THEN no PR opens and nothing is installed.
+        self.assertIsNone(self.upgrade_dev())
+        self.assertEqual(self.installs, 0)
+
+        # GIVEN a release of `common` 0.2.0.
+        self.repo.set_common_version("0.2.0", "chore(release): common 0.2.0")
+        self.repo.tag("common-v0.2.0")
+
+        # WHEN/THEN a PR opens that repins `common` and regenerates the lockfile.
+        pr = self.upgrade_dev()
+        self.assertEqual(pr["title"], "chore: upgrade dev pins to common 0.2.0")
+        self.assertEqual(release.check_message(pr["title"]), [])
+        branch = f"origin/{release.UPGRADE_BRANCH}"
+        manifest = self.repo.git.show(branch, "dev/apm.yml")
+        self.assertIn("#common-v0.2.0", manifest)
+        self.assertEqual(self.repo.git.show(branch, "apm.lock.yaml"), f"installed from:\n{manifest}")
+
+        # GIVEN another release before the PR merges.
+        self.repo.git.run("checkout", "-q", "--", ".")
+        self.repo.set_common_version("0.3.0", "chore(release): common 0.3.0")
+        self.repo.tag("common-v0.3.0")
+
+        # WHEN/THEN the same PR is updated to the newer tag.
+        updated = self.upgrade_dev()
+        self.assertEqual(updated["number"], pr["number"])
+        self.assertEqual(updated["title"], "chore: upgrade dev pins to common 0.3.0")
+
+        # WHEN the PR is merged and the workflow runs again.
+        self.repo.git.run("checkout", "-q", "--", ".")
+        self.repo.git.run("fetch", "-q", "origin")
+        self.repo.git.run("merge", "-q", "--ff-only", branch)
+
+        # THEN the PR is closed without another install.
+        self.assertIsNone(self.upgrade_dev())
+        self.assertEqual(self.installs, 2)
 
 
 if __name__ == "__main__":

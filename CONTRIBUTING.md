@@ -16,6 +16,8 @@ cd dev && apm install --root ..
 
 This deploys the collections pinned in [`dev/apm.yml`](dev/apm.yml) to `.claude/` and `.github/`. The deployed files are ignored by Git, so rerun it after a fresh clone or after changing the pins. Don't run `apm install` from the repository root: it would deploy every primitive in `.apm/`, including ones that don't apply here.
 
+After a release of a pinned collection, the release workflow opens a PR that upgrades the pins; see [Upgrading the dev pins](docs/releasing.md#upgrading-the-dev-pins). The APM CLI version in [`setup-apm`](.github/actions/setup-apm/action.yml) is still bumped by hand. Dependabot bumps the GitHub Actions weekly.
+
 ## Commit messages and PR titles
 
 PRs are squash-merged and the squash commit on `main` is the PR title, so the PR title is what counts. The hook checks local commits for the same format, but only the PR title affects releases.

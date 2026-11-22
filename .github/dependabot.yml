@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    # PR checks require a Conventional Commits title; Dependabot adds the colon.
+    commit-message:
+      prefix: chore
+    groups:
+      github-actions:
+        patterns: ["*"]
