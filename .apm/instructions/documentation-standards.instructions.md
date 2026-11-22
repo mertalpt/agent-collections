@@ -58,6 +58,11 @@ duplication is local and honest; cross-file coupling rots.
 
 Prefer ASCII.
 
+Do not hard-wrap text posted to a service that renders single line breaks,
+such as GitHub pull request descriptions, issues, and comments: every break
+shows, so lines end short of the reader's width. Write each paragraph and
+list item on one line.
+
 Do not audit existing code for missing docs unless asked, but document a
 hard-won gotcha when you hit one in code the task changes; otherwise,
 propose it.
