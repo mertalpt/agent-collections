@@ -21,6 +21,8 @@ dependencies:
   - git: parent
     path: .apm/instructions/documentation-standards.instructions.md
   - git: parent
+    path: .apm/instructions/decision-records.instructions.md
+  - git: parent
     path: .apm/instructions/testing.instructions.md
   - git: parent
     path: .apm/instructions/secrets.instructions.md

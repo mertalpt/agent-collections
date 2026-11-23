@@ -1,0 +1,7 @@
+- id: intent-decisions
+  name: Decision records
+  description: Checks the decision records under `intent/` against the base of the change set.
+  entry: .apm/skills/intent-decisions/scripts/adr.py check
+  language: script
+  pass_filenames: false
+  always_run: true

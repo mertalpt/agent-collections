@@ -1,5 +1,5 @@
 ---
-description: "What to document and how, for every artifact that outlives the session: code comments, commits, pull requests, issues, decision records, docs, and saved session artifacts."
+description: "What to document and how, for every artifact that outlives the session: code comments, commits, pull requests, issues, docs, and saved session artifacts."
 applyTo: "**"
 ---
 
@@ -73,7 +73,7 @@ propose it.
 reader. Rename before you comment: a better name often removes the need. No
 commented-out code, no change history, and no decorative dividers. A
 localized detail is a comment; a choice that locks in an architecture is a
-decision record.
+decision record where the repository keeps them, otherwise the pull request.
 * **Commit:** what changed, high-level, describing the present state. The
 subject follows Conventional Commits, in the imperative, at most 72
 characters. The body is optional and absent by default; when present, it is a
@@ -90,9 +90,6 @@ reviewer how to test the change; it is not a report of how you tested it.
 When a section's purpose is unclear, it is the user's decision.
 * **Agent instruction:** state each rule with its scope and its reason, so
 an agent can tell where it holds. A rule without either reads as universal.
-* **Decision record:** why the system is shaped as it is. The decision body is
-immutable. A correction to a still-valid decision is a dated append; a
-refinement or reversal is a new record that marks the old one as superseded.
 * **Issue:** a problem or goal, not a fix. It may list possible approaches;
 when the fix is already known, propose a pull request instead. Use the
 repository's issue template for the issue's kind when it has one, keep its

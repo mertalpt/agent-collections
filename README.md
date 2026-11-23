@@ -24,6 +24,8 @@ Install a released collection by its tag:
 apm install mertalpt/agent-collections/collections/<name>#<name>-vX.Y.Z
 ```
 
+The `intent` collection's checks run as a pre-commit hook; see "Setting up a repository" in [its skill](.apm/skills/intent-decisions/SKILL.md).
+
 Check for newer releases with `apm outdated`. Release notes are on the [GitHub Releases](https://github.com/mertalpt/agent-collections/releases) page.
 
 ## Contributing
