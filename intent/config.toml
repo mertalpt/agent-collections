@@ -1,0 +1,6 @@
+# origin/HEAD is not set by every clone or by actions/checkout.
+canonical_branch = "origin/main"
+
+# Holds literal record paths as test fixtures.
+[references]
+exclude = ["scripts/tests/test_adr.py"]

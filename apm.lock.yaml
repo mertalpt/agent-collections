@@ -20,6 +20,21 @@ dependencies:
     source: LICENSE.md
     hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
 - repo_url: mertalpt/agent-collections
+  name: intent
+  host: github.com
+  resolved_commit: cc140b8b5dc71236bd081d1b6ca340a1862c7320
+  resolved_ref: intent-v0.3.0
+  version: 0.3.0
+  virtual_path: collections/intent
+  is_virtual: true
+  package_type: apm_package
+  content_hash: sha256:4b8080e97b340b19cc36c20b90f999585e6ee133dc876512c527a329453ccf5a
+  declared_license: MIT
+  carried_licenses:
+  - path: LICENSE.md
+    source: LICENSE.md
+    hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+- repo_url: mertalpt/agent-collections
   name: python
   host: github.com
   resolved_commit: 74c142c63b633cb99a9177e9eaba85ae40e46f76
@@ -106,6 +121,24 @@ dependencies:
     .claude/rules/documentation-standards.md: sha256:e4b8b23a4e8ae02b701fd2b4b45e3eb9e8f1cbdfd36916111fafca8b502efee8
     .github/instructions/documentation-standards.instructions.md: sha256:4bd455c5e8e678c56df6e37bfc02e3ff80ee9b6b964fad7e7402dbaa810b8736
   content_hash: sha256:49c6e532bfdb2c3ab660056ba0299726112d83f48c62f936c959d4d2781fcbf5
+- repo_url: mertalpt/agent-collections
+  name: agent-collections-intent-decisions
+  host: github.com
+  resolved_commit: cc140b8b5dc71236bd081d1b6ca340a1862c7320
+  resolved_ref: intent-v0.3.0
+  version: 1.0.0
+  virtual_path: .apm/instructions/intent-decisions.instructions.md
+  is_virtual: true
+  depth: 2
+  resolved_by: mertalpt/agent-collections
+  package_type: apm_package
+  deployed_files:
+  - .claude/rules/intent-decisions.md
+  - .github/instructions/intent-decisions.instructions.md
+  deployed_file_hashes:
+    .claude/rules/intent-decisions.md: sha256:de067dcd4ae8d4dc825d9d46a6fb045d836f7dcd6d1a7801bc8ccd5436de8618
+    .github/instructions/intent-decisions.instructions.md: sha256:f8496ddc4254367b2bce303ca341aa6a57efcd5ffc912c6262b42e8437beb758
+  content_hash: sha256:822382850b4c4f8164a9b087e0a732a61b8d8dcf4f91b8d4daad6bd74a971711
 - repo_url: mertalpt/agent-collections
   name: agent-collections-python-code
   host: github.com
@@ -238,6 +271,38 @@ dependencies:
     .claude/skills/brief/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
     .claude/skills/brief/SKILL.md: sha256:754677173184efae363c91f04adc8c08c4681e3a60c27f993f6b829f0ee9a4ac
   content_hash: sha256:769385dea5e21ddf9e2619c582131551a618602bd0d88a10196f7c54fdad44a6
+  carried_licenses:
+  - path: LICENSE.md
+    source: LICENSE.md
+    hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+- repo_url: mertalpt/agent-collections
+  name: intent-decisions
+  host: github.com
+  resolved_commit: cc140b8b5dc71236bd081d1b6ca340a1862c7320
+  resolved_ref: intent-v0.3.0
+  version: unknown
+  virtual_path: .apm/skills/intent-decisions
+  is_virtual: true
+  depth: 2
+  resolved_by: mertalpt/agent-collections
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/intent-decisions
+  - .agents/skills/intent-decisions/LICENSE.md
+  - .agents/skills/intent-decisions/SKILL.md
+  - .agents/skills/intent-decisions/scripts/adr.py
+  - .claude/skills/intent-decisions
+  - .claude/skills/intent-decisions/LICENSE.md
+  - .claude/skills/intent-decisions/SKILL.md
+  - .claude/skills/intent-decisions/scripts/adr.py
+  deployed_file_hashes:
+    .agents/skills/intent-decisions/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+    .agents/skills/intent-decisions/SKILL.md: sha256:66bc8811adfa336d7a67ead51bcfc1e018c64c4dca6cb25c8fcb418f2702fefa
+    .agents/skills/intent-decisions/scripts/adr.py: sha256:45daa24c79d797a0698dd375d0de54441565e7219b880f687dd3135984060220
+    .claude/skills/intent-decisions/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+    .claude/skills/intent-decisions/SKILL.md: sha256:66bc8811adfa336d7a67ead51bcfc1e018c64c4dca6cb25c8fcb418f2702fefa
+    .claude/skills/intent-decisions/scripts/adr.py: sha256:45daa24c79d797a0698dd375d0de54441565e7219b880f687dd3135984060220
+  content_hash: sha256:6498482339a273263b1375a84ebfcfa518614fda501ee248735ec76fba59c403
   carried_licenses:
   - path: LICENSE.md
     source: LICENSE.md
@@ -393,6 +458,15 @@ deployments:
   content_hash: sha256:e4b8b23a4e8ae02b701fd2b4b45e3eb9e8f1cbdfd36916111fafca8b502efee8
 - kind: project-relative
   target: claude
+  value: .claude/rules/intent-decisions.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/instructions/intent-decisions.instructions.md
+  active_owner: mertalpt/agent-collections/.apm/instructions/intent-decisions.instructions.md
+  content_hash: sha256:de067dcd4ae8d4dc825d9d46a6fb045d836f7dcd6d1a7801bc8ccd5436de8618
+- kind: project-relative
+  target: claude
   value: .claude/rules/python-code.md
   runtime: null
   scope: project
@@ -472,6 +546,42 @@ deployments:
   - mertalpt/agent-collections/.apm/skills/brief
   active_owner: mertalpt/agent-collections/.apm/skills/brief
   content_hash: sha256:754677173184efae363c91f04adc8c08c4681e3a60c27f993f6b829f0ee9a4ac
+- kind: project-relative
+  target: claude
+  value: .claude/skills/intent-decisions
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/intent-decisions
+  active_owner: mertalpt/agent-collections/.apm/skills/intent-decisions
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/intent-decisions/LICENSE.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/intent-decisions
+  active_owner: mertalpt/agent-collections/.apm/skills/intent-decisions
+  content_hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/intent-decisions/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/intent-decisions
+  active_owner: mertalpt/agent-collections/.apm/skills/intent-decisions
+  content_hash: sha256:66bc8811adfa336d7a67ead51bcfc1e018c64c4dca6cb25c8fcb418f2702fefa
+- kind: project-relative
+  target: claude
+  value: .claude/skills/intent-decisions/scripts/adr.py
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/intent-decisions
+  active_owner: mertalpt/agent-collections/.apm/skills/intent-decisions
+  content_hash: sha256:45daa24c79d797a0698dd375d0de54441565e7219b880f687dd3135984060220
 - kind: project-relative
   target: claude
   value: .claude/skills/interview
@@ -607,6 +717,42 @@ deployments:
   - mertalpt/agent-collections/.apm/skills/brief
   active_owner: mertalpt/agent-collections/.apm/skills/brief
   content_hash: sha256:754677173184efae363c91f04adc8c08c4681e3a60c27f993f6b829f0ee9a4ac
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/intent-decisions
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/intent-decisions
+  active_owner: mertalpt/agent-collections/.apm/skills/intent-decisions
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/intent-decisions/LICENSE.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/intent-decisions
+  active_owner: mertalpt/agent-collections/.apm/skills/intent-decisions
+  content_hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/intent-decisions/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/intent-decisions
+  active_owner: mertalpt/agent-collections/.apm/skills/intent-decisions
+  content_hash: sha256:66bc8811adfa336d7a67ead51bcfc1e018c64c4dca6cb25c8fcb418f2702fefa
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/intent-decisions/scripts/adr.py
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/intent-decisions
+  active_owner: mertalpt/agent-collections/.apm/skills/intent-decisions
+  content_hash: sha256:45daa24c79d797a0698dd375d0de54441565e7219b880f687dd3135984060220
 - kind: project-relative
   target: copilot
   value: .agents/skills/interview
@@ -751,6 +897,15 @@ deployments:
   - mertalpt/agent-collections/.apm/instructions/documentation-standards.instructions.md
   active_owner: mertalpt/agent-collections/.apm/instructions/documentation-standards.instructions.md
   content_hash: sha256:4bd455c5e8e678c56df6e37bfc02e3ff80ee9b6b964fad7e7402dbaa810b8736
+- kind: project-relative
+  target: copilot
+  value: .github/instructions/intent-decisions.instructions.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/instructions/intent-decisions.instructions.md
+  active_owner: mertalpt/agent-collections/.apm/instructions/intent-decisions.instructions.md
+  content_hash: sha256:f8496ddc4254367b2bce303ca341aa6a57efcd5ffc912c6262b42e8437beb758
 - kind: project-relative
   target: copilot
   value: .github/instructions/python-code.instructions.md
