@@ -7,13 +7,13 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: common
   host: github.com
-  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
-  resolved_ref: common-v0.5.0
-  version: 0.5.0
+  resolved_commit: 34dd24497a9fc65a6c62a9cd07852409dce7186f
+  resolved_ref: common-v0.6.0
+  version: 0.6.0
   virtual_path: collections/common
   is_virtual: true
   package_type: apm_package
-  content_hash: sha256:70386f371beb9be9ac64b5ba43f53595bba9f7a0c09c680cceee0893b12a630c
+  content_hash: sha256:69ed37c55c20d194a580c28f04582ed515b8c95c33e269ec8d62a6b4e133ed7d
   declared_license: MIT
   carried_licenses:
   - path: LICENSE.md
@@ -50,46 +50,10 @@ dependencies:
     source: LICENSE.md
     hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
 - repo_url: mertalpt/agent-collections
-  name: agent-collections-product-owner
-  host: github.com
-  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
-  resolved_ref: common-v0.5.0
-  version: 1.0.0
-  virtual_path: .apm/agents/product-owner.agent.md
-  is_virtual: true
-  depth: 2
-  resolved_by: mertalpt/agent-collections
-  package_type: apm_package
-  deployed_files:
-  - .claude/agents/product-owner.md
-  - .github/agents/product-owner.agent.md
-  deployed_file_hashes:
-    .claude/agents/product-owner.md: sha256:c4981c4b404f2a86df2878c89a7391c852e825ae2a54babeb2724108482ce266
-    .github/agents/product-owner.agent.md: sha256:c4981c4b404f2a86df2878c89a7391c852e825ae2a54babeb2724108482ce266
-  content_hash: sha256:00cc7ba4d12ee390ca79504988c34300bf869251d4f88f62e70d3980ff4b59eb
-- repo_url: mertalpt/agent-collections
-  name: agent-collections-software-architect
-  host: github.com
-  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
-  resolved_ref: common-v0.5.0
-  version: 1.0.0
-  virtual_path: .apm/agents/software-architect.agent.md
-  is_virtual: true
-  depth: 2
-  resolved_by: mertalpt/agent-collections
-  package_type: apm_package
-  deployed_files:
-  - .claude/agents/software-architect.md
-  - .github/agents/software-architect.agent.md
-  deployed_file_hashes:
-    .claude/agents/software-architect.md: sha256:42439381b9e1cbed29cfb22c34531cc9e0cb22eef53efd7ca7836850be9e1f4e
-    .github/agents/software-architect.agent.md: sha256:42439381b9e1cbed29cfb22c34531cc9e0cb22eef53efd7ca7836850be9e1f4e
-  content_hash: sha256:0188ae4bc5de5a2c4f3b6ff788a65c9f8375153933092bab222b7851554fcfb7
-- repo_url: mertalpt/agent-collections
   name: agent-collections-decision-records
   host: github.com
-  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
-  resolved_ref: common-v0.5.0
+  resolved_commit: 34dd24497a9fc65a6c62a9cd07852409dce7186f
+  resolved_ref: common-v0.6.0
   version: 1.0.0
   virtual_path: .apm/instructions/decision-records.instructions.md
   is_virtual: true
@@ -106,8 +70,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: agent-collections-documentation-standards
   host: github.com
-  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
-  resolved_ref: common-v0.5.0
+  resolved_commit: 34dd24497a9fc65a6c62a9cd07852409dce7186f
+  resolved_ref: common-v0.6.0
   version: 1.0.0
   virtual_path: .apm/instructions/documentation-standards.instructions.md
   is_virtual: true
@@ -178,8 +142,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: agent-collections-questions
   host: github.com
-  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
-  resolved_ref: common-v0.5.0
+  resolved_commit: 34dd24497a9fc65a6c62a9cd07852409dce7186f
+  resolved_ref: common-v0.6.0
   version: 1.0.0
   virtual_path: .apm/instructions/questions.instructions.md
   is_virtual: true
@@ -196,8 +160,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: agent-collections-secrets
   host: github.com
-  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
-  resolved_ref: common-v0.5.0
+  resolved_commit: 34dd24497a9fc65a6c62a9cd07852409dce7186f
+  resolved_ref: common-v0.6.0
   version: 1.0.0
   virtual_path: .apm/instructions/secrets.instructions.md
   is_virtual: true
@@ -214,8 +178,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: agent-collections-testing
   host: github.com
-  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
-  resolved_ref: common-v0.5.0
+  resolved_commit: 34dd24497a9fc65a6c62a9cd07852409dce7186f
+  resolved_ref: common-v0.6.0
   version: 1.0.0
   virtual_path: .apm/instructions/testing.instructions.md
   is_virtual: true
@@ -232,8 +196,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: agent-collections-working-agreement
   host: github.com
-  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
-  resolved_ref: common-v0.5.0
+  resolved_commit: 34dd24497a9fc65a6c62a9cd07852409dce7186f
+  resolved_ref: common-v0.6.0
   version: 1.0.0
   virtual_path: .apm/instructions/working-agreement.instructions.md
   is_virtual: true
@@ -250,8 +214,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: brief
   host: github.com
-  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
-  resolved_ref: common-v0.5.0
+  resolved_commit: 34dd24497a9fc65a6c62a9cd07852409dce7186f
+  resolved_ref: common-v0.6.0
   version: unknown
   virtual_path: .apm/skills/brief
   is_virtual: true
@@ -271,6 +235,34 @@ dependencies:
     .claude/skills/brief/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
     .claude/skills/brief/SKILL.md: sha256:754677173184efae363c91f04adc8c08c4681e3a60c27f993f6b829f0ee9a4ac
   content_hash: sha256:769385dea5e21ddf9e2619c582131551a618602bd0d88a10196f7c54fdad44a6
+  carried_licenses:
+  - path: LICENSE.md
+    source: LICENSE.md
+    hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+- repo_url: mertalpt/agent-collections
+  name: design-spec
+  host: github.com
+  resolved_commit: 34dd24497a9fc65a6c62a9cd07852409dce7186f
+  resolved_ref: common-v0.6.0
+  version: unknown
+  virtual_path: .apm/skills/design-spec
+  is_virtual: true
+  depth: 2
+  resolved_by: mertalpt/agent-collections
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/design-spec
+  - .agents/skills/design-spec/LICENSE.md
+  - .agents/skills/design-spec/SKILL.md
+  - .claude/skills/design-spec
+  - .claude/skills/design-spec/LICENSE.md
+  - .claude/skills/design-spec/SKILL.md
+  deployed_file_hashes:
+    .agents/skills/design-spec/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+    .agents/skills/design-spec/SKILL.md: sha256:80b284050c5fec968d7f65ad39f91f734e8c2ef6d14f108bd12796af84aa2003
+    .claude/skills/design-spec/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+    .claude/skills/design-spec/SKILL.md: sha256:80b284050c5fec968d7f65ad39f91f734e8c2ef6d14f108bd12796af84aa2003
+  content_hash: sha256:1382b7440e5b979f1ce3b0613e63d9b2b0a2c50323bd4888454fe1c1cbb84182
   carried_licenses:
   - path: LICENSE.md
     source: LICENSE.md
@@ -310,8 +302,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: interview
   host: github.com
-  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
-  resolved_ref: common-v0.5.0
+  resolved_commit: 34dd24497a9fc65a6c62a9cd07852409dce7186f
+  resolved_ref: common-v0.6.0
   version: unknown
   virtual_path: .apm/skills/interview
   is_virtual: true
@@ -338,8 +330,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: recursive-self-improvement
   host: github.com
-  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
-  resolved_ref: common-v0.5.0
+  resolved_commit: 34dd24497a9fc65a6c62a9cd07852409dce7186f
+  resolved_ref: common-v0.6.0
   version: unknown
   virtual_path: .apm/skills/recursive-self-improvement
   is_virtual: true
@@ -364,10 +356,38 @@ dependencies:
     source: LICENSE.md
     hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
 - repo_url: mertalpt/agent-collections
+  name: refine-task
+  host: github.com
+  resolved_commit: 34dd24497a9fc65a6c62a9cd07852409dce7186f
+  resolved_ref: common-v0.6.0
+  version: unknown
+  virtual_path: .apm/skills/refine-task
+  is_virtual: true
+  depth: 2
+  resolved_by: mertalpt/agent-collections
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/refine-task
+  - .agents/skills/refine-task/LICENSE.md
+  - .agents/skills/refine-task/SKILL.md
+  - .claude/skills/refine-task
+  - .claude/skills/refine-task/LICENSE.md
+  - .claude/skills/refine-task/SKILL.md
+  deployed_file_hashes:
+    .agents/skills/refine-task/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+    .agents/skills/refine-task/SKILL.md: sha256:62e99b612bfa3629253e25632a7570ff2444ecf909a78fceb174d1861ce26f1e
+    .claude/skills/refine-task/LICENSE.md: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+    .claude/skills/refine-task/SKILL.md: sha256:62e99b612bfa3629253e25632a7570ff2444ecf909a78fceb174d1861ce26f1e
+  content_hash: sha256:8fcedd9d1315d808f784c5818b34d16fe42807ba9b1370efa651c350b52b64d4
+  carried_licenses:
+  - path: LICENSE.md
+    source: LICENSE.md
+    hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+- repo_url: mertalpt/agent-collections
   name: review-comments
   host: github.com
-  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
-  resolved_ref: common-v0.5.0
+  resolved_commit: 34dd24497a9fc65a6c62a9cd07852409dce7186f
+  resolved_ref: common-v0.6.0
   version: unknown
   virtual_path: .apm/skills/review-comments
   is_virtual: true
@@ -394,8 +414,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: to-file
   host: github.com
-  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
-  resolved_ref: common-v0.5.0
+  resolved_commit: 34dd24497a9fc65a6c62a9cd07852409dce7186f
+  resolved_ref: common-v0.6.0
   version: unknown
   virtual_path: .apm/skills/to-file
   is_virtual: true
@@ -420,24 +440,6 @@ dependencies:
     source: LICENSE.md
     hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
 deployments:
-- kind: project-relative
-  target: claude
-  value: .claude/agents/product-owner.md
-  runtime: null
-  scope: project
-  owners:
-  - mertalpt/agent-collections/.apm/agents/product-owner.agent.md
-  active_owner: mertalpt/agent-collections/.apm/agents/product-owner.agent.md
-  content_hash: sha256:c4981c4b404f2a86df2878c89a7391c852e825ae2a54babeb2724108482ce266
-- kind: project-relative
-  target: claude
-  value: .claude/agents/software-architect.md
-  runtime: null
-  scope: project
-  owners:
-  - mertalpt/agent-collections/.apm/agents/software-architect.agent.md
-  active_owner: mertalpt/agent-collections/.apm/agents/software-architect.agent.md
-  content_hash: sha256:42439381b9e1cbed29cfb22c34531cc9e0cb22eef53efd7ca7836850be9e1f4e
 - kind: project-relative
   target: claude
   value: .claude/rules/decision-records.md
@@ -548,6 +550,33 @@ deployments:
   content_hash: sha256:754677173184efae363c91f04adc8c08c4681e3a60c27f993f6b829f0ee9a4ac
 - kind: project-relative
   target: claude
+  value: .claude/skills/design-spec
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/design-spec
+  active_owner: mertalpt/agent-collections/.apm/skills/design-spec
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/design-spec/LICENSE.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/design-spec
+  active_owner: mertalpt/agent-collections/.apm/skills/design-spec
+  content_hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/design-spec/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/design-spec
+  active_owner: mertalpt/agent-collections/.apm/skills/design-spec
+  content_hash: sha256:80b284050c5fec968d7f65ad39f91f734e8c2ef6d14f108bd12796af84aa2003
+- kind: project-relative
+  target: claude
   value: .claude/skills/intent-decisions
   runtime: null
   scope: project
@@ -638,6 +667,33 @@ deployments:
   content_hash: sha256:f67bfaf76c2e75ba1a91f374a056a59a1d70c718a4de8c333e6cd2a349911aa3
 - kind: project-relative
   target: claude
+  value: .claude/skills/refine-task
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/refine-task
+  active_owner: mertalpt/agent-collections/.apm/skills/refine-task
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/refine-task/LICENSE.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/refine-task
+  active_owner: mertalpt/agent-collections/.apm/skills/refine-task
+  content_hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/refine-task/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/refine-task
+  active_owner: mertalpt/agent-collections/.apm/skills/refine-task
+  content_hash: sha256:62e99b612bfa3629253e25632a7570ff2444ecf909a78fceb174d1861ce26f1e
+- kind: project-relative
+  target: claude
   value: .claude/skills/review-comments
   runtime: null
   scope: project
@@ -717,6 +773,33 @@ deployments:
   - mertalpt/agent-collections/.apm/skills/brief
   active_owner: mertalpt/agent-collections/.apm/skills/brief
   content_hash: sha256:754677173184efae363c91f04adc8c08c4681e3a60c27f993f6b829f0ee9a4ac
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/design-spec
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/design-spec
+  active_owner: mertalpt/agent-collections/.apm/skills/design-spec
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/design-spec/LICENSE.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/design-spec
+  active_owner: mertalpt/agent-collections/.apm/skills/design-spec
+  content_hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/design-spec/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/design-spec
+  active_owner: mertalpt/agent-collections/.apm/skills/design-spec
+  content_hash: sha256:80b284050c5fec968d7f65ad39f91f734e8c2ef6d14f108bd12796af84aa2003
 - kind: project-relative
   target: copilot
   value: .agents/skills/intent-decisions
@@ -809,6 +892,33 @@ deployments:
   content_hash: sha256:f67bfaf76c2e75ba1a91f374a056a59a1d70c718a4de8c333e6cd2a349911aa3
 - kind: project-relative
   target: copilot
+  value: .agents/skills/refine-task
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/refine-task
+  active_owner: mertalpt/agent-collections/.apm/skills/refine-task
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/refine-task/LICENSE.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/refine-task
+  active_owner: mertalpt/agent-collections/.apm/skills/refine-task
+  content_hash: sha256:43d8494d177bb7f4a207cb6a132f4ce46cce23312b0eab306818ecf2745c293d
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/refine-task/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/skills/refine-task
+  active_owner: mertalpt/agent-collections/.apm/skills/refine-task
+  content_hash: sha256:62e99b612bfa3629253e25632a7570ff2444ecf909a78fceb174d1861ce26f1e
+- kind: project-relative
+  target: copilot
   value: .agents/skills/review-comments
   runtime: null
   scope: project
@@ -861,24 +971,6 @@ deployments:
   - mertalpt/agent-collections/.apm/skills/to-file
   active_owner: mertalpt/agent-collections/.apm/skills/to-file
   content_hash: sha256:5f3c85c70a9d95820c16fb53c41a2d0eef4b1608302813650f74cbb172798f63
-- kind: project-relative
-  target: copilot
-  value: .github/agents/product-owner.agent.md
-  runtime: null
-  scope: project
-  owners:
-  - mertalpt/agent-collections/.apm/agents/product-owner.agent.md
-  active_owner: mertalpt/agent-collections/.apm/agents/product-owner.agent.md
-  content_hash: sha256:c4981c4b404f2a86df2878c89a7391c852e825ae2a54babeb2724108482ce266
-- kind: project-relative
-  target: copilot
-  value: .github/agents/software-architect.agent.md
-  runtime: null
-  scope: project
-  owners:
-  - mertalpt/agent-collections/.apm/agents/software-architect.agent.md
-  active_owner: mertalpt/agent-collections/.apm/agents/software-architect.agent.md
-  content_hash: sha256:42439381b9e1cbed29cfb22c34531cc9e0cb22eef53efd7ca7836850be9e1f4e
 - kind: project-relative
   target: copilot
   value: .github/instructions/decision-records.instructions.md
