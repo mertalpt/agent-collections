@@ -7,13 +7,13 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: common
   host: github.com
-  resolved_commit: 332ff7e58185d28e046d2050ec0a32f4f5865c5a
-  resolved_ref: common-v0.4.0
-  version: 0.4.0
+  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
+  resolved_ref: common-v0.5.0
+  version: 0.5.0
   virtual_path: collections/common
   is_virtual: true
   package_type: apm_package
-  content_hash: sha256:a447e5a7e012d6bc7cc9d5e60fdda4ba0eed1c4505162d1bf3b6c8e645259e08
+  content_hash: sha256:70386f371beb9be9ac64b5ba43f53595bba9f7a0c09c680cceee0893b12a630c
   declared_license: MIT
   carried_licenses:
   - path: LICENSE.md
@@ -37,8 +37,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: agent-collections-product-owner
   host: github.com
-  resolved_commit: 332ff7e58185d28e046d2050ec0a32f4f5865c5a
-  resolved_ref: common-v0.4.0
+  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
+  resolved_ref: common-v0.5.0
   version: 1.0.0
   virtual_path: .apm/agents/product-owner.agent.md
   is_virtual: true
@@ -55,8 +55,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: agent-collections-software-architect
   host: github.com
-  resolved_commit: 332ff7e58185d28e046d2050ec0a32f4f5865c5a
-  resolved_ref: common-v0.4.0
+  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
+  resolved_ref: common-v0.5.0
   version: 1.0.0
   virtual_path: .apm/agents/software-architect.agent.md
   is_virtual: true
@@ -71,10 +71,28 @@ dependencies:
     .github/agents/software-architect.agent.md: sha256:42439381b9e1cbed29cfb22c34531cc9e0cb22eef53efd7ca7836850be9e1f4e
   content_hash: sha256:0188ae4bc5de5a2c4f3b6ff788a65c9f8375153933092bab222b7851554fcfb7
 - repo_url: mertalpt/agent-collections
+  name: agent-collections-decision-records
+  host: github.com
+  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
+  resolved_ref: common-v0.5.0
+  version: 1.0.0
+  virtual_path: .apm/instructions/decision-records.instructions.md
+  is_virtual: true
+  depth: 2
+  resolved_by: mertalpt/agent-collections
+  package_type: apm_package
+  deployed_files:
+  - .claude/rules/decision-records.md
+  - .github/instructions/decision-records.instructions.md
+  deployed_file_hashes:
+    .claude/rules/decision-records.md: sha256:7f42fbc6c64769854ac24e3594926cc1af023a30dd70f386fab00ef4f3a05c81
+    .github/instructions/decision-records.instructions.md: sha256:5291b0af87a9e1c0f4c0e12ff7d3ae52a990422c8c579417259e0f9c8c559391
+  content_hash: sha256:3d18b6352c5bc5d2492642d7d80018db598f39f2fee7ec6df005c44b63979115
+- repo_url: mertalpt/agent-collections
   name: agent-collections-documentation-standards
   host: github.com
-  resolved_commit: 332ff7e58185d28e046d2050ec0a32f4f5865c5a
-  resolved_ref: common-v0.4.0
+  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
+  resolved_ref: common-v0.5.0
   version: 1.0.0
   virtual_path: .apm/instructions/documentation-standards.instructions.md
   is_virtual: true
@@ -85,9 +103,9 @@ dependencies:
   - .claude/rules/documentation-standards.md
   - .github/instructions/documentation-standards.instructions.md
   deployed_file_hashes:
-    .claude/rules/documentation-standards.md: sha256:55a4bf8ef337cc95a212b501b39d537481269adea69e1e5a03b6053937644993
-    .github/instructions/documentation-standards.instructions.md: sha256:80b910ea296ebbaea942b5a67c71be562e4f31f1afbe25a888b4ad045751fcba
-  content_hash: sha256:471fb3a317c8a2916968de2e60335d8dccbb9b450c0cebd5f88f865b828a6fda
+    .claude/rules/documentation-standards.md: sha256:e4b8b23a4e8ae02b701fd2b4b45e3eb9e8f1cbdfd36916111fafca8b502efee8
+    .github/instructions/documentation-standards.instructions.md: sha256:4bd455c5e8e678c56df6e37bfc02e3ff80ee9b6b964fad7e7402dbaa810b8736
+  content_hash: sha256:49c6e532bfdb2c3ab660056ba0299726112d83f48c62f936c959d4d2781fcbf5
 - repo_url: mertalpt/agent-collections
   name: agent-collections-python-code
   host: github.com
@@ -127,8 +145,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: agent-collections-questions
   host: github.com
-  resolved_commit: 332ff7e58185d28e046d2050ec0a32f4f5865c5a
-  resolved_ref: common-v0.4.0
+  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
+  resolved_ref: common-v0.5.0
   version: 1.0.0
   virtual_path: .apm/instructions/questions.instructions.md
   is_virtual: true
@@ -145,8 +163,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: agent-collections-secrets
   host: github.com
-  resolved_commit: 332ff7e58185d28e046d2050ec0a32f4f5865c5a
-  resolved_ref: common-v0.4.0
+  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
+  resolved_ref: common-v0.5.0
   version: 1.0.0
   virtual_path: .apm/instructions/secrets.instructions.md
   is_virtual: true
@@ -163,8 +181,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: agent-collections-testing
   host: github.com
-  resolved_commit: 332ff7e58185d28e046d2050ec0a32f4f5865c5a
-  resolved_ref: common-v0.4.0
+  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
+  resolved_ref: common-v0.5.0
   version: 1.0.0
   virtual_path: .apm/instructions/testing.instructions.md
   is_virtual: true
@@ -181,8 +199,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: agent-collections-working-agreement
   host: github.com
-  resolved_commit: 332ff7e58185d28e046d2050ec0a32f4f5865c5a
-  resolved_ref: common-v0.4.0
+  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
+  resolved_ref: common-v0.5.0
   version: 1.0.0
   virtual_path: .apm/instructions/working-agreement.instructions.md
   is_virtual: true
@@ -199,8 +217,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: brief
   host: github.com
-  resolved_commit: 332ff7e58185d28e046d2050ec0a32f4f5865c5a
-  resolved_ref: common-v0.4.0
+  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
+  resolved_ref: common-v0.5.0
   version: unknown
   virtual_path: .apm/skills/brief
   is_virtual: true
@@ -227,8 +245,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: interview
   host: github.com
-  resolved_commit: 332ff7e58185d28e046d2050ec0a32f4f5865c5a
-  resolved_ref: common-v0.4.0
+  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
+  resolved_ref: common-v0.5.0
   version: unknown
   virtual_path: .apm/skills/interview
   is_virtual: true
@@ -255,8 +273,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: recursive-self-improvement
   host: github.com
-  resolved_commit: 332ff7e58185d28e046d2050ec0a32f4f5865c5a
-  resolved_ref: common-v0.4.0
+  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
+  resolved_ref: common-v0.5.0
   version: unknown
   virtual_path: .apm/skills/recursive-self-improvement
   is_virtual: true
@@ -283,8 +301,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: review-comments
   host: github.com
-  resolved_commit: 332ff7e58185d28e046d2050ec0a32f4f5865c5a
-  resolved_ref: common-v0.4.0
+  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
+  resolved_ref: common-v0.5.0
   version: unknown
   virtual_path: .apm/skills/review-comments
   is_virtual: true
@@ -311,8 +329,8 @@ dependencies:
 - repo_url: mertalpt/agent-collections
   name: to-file
   host: github.com
-  resolved_commit: 332ff7e58185d28e046d2050ec0a32f4f5865c5a
-  resolved_ref: common-v0.4.0
+  resolved_commit: d7a6ed31b60c6737e48c01b2989075cb00a69242
+  resolved_ref: common-v0.5.0
   version: unknown
   virtual_path: .apm/skills/to-file
   is_virtual: true
@@ -357,13 +375,22 @@ deployments:
   content_hash: sha256:42439381b9e1cbed29cfb22c34531cc9e0cb22eef53efd7ca7836850be9e1f4e
 - kind: project-relative
   target: claude
+  value: .claude/rules/decision-records.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/instructions/decision-records.instructions.md
+  active_owner: mertalpt/agent-collections/.apm/instructions/decision-records.instructions.md
+  content_hash: sha256:7f42fbc6c64769854ac24e3594926cc1af023a30dd70f386fab00ef4f3a05c81
+- kind: project-relative
+  target: claude
   value: .claude/rules/documentation-standards.md
   runtime: null
   scope: project
   owners:
   - mertalpt/agent-collections/.apm/instructions/documentation-standards.instructions.md
   active_owner: mertalpt/agent-collections/.apm/instructions/documentation-standards.instructions.md
-  content_hash: sha256:55a4bf8ef337cc95a212b501b39d537481269adea69e1e5a03b6053937644993
+  content_hash: sha256:e4b8b23a4e8ae02b701fd2b4b45e3eb9e8f1cbdfd36916111fafca8b502efee8
 - kind: project-relative
   target: claude
   value: .claude/rules/python-code.md
@@ -708,13 +735,22 @@ deployments:
   content_hash: sha256:42439381b9e1cbed29cfb22c34531cc9e0cb22eef53efd7ca7836850be9e1f4e
 - kind: project-relative
   target: copilot
+  value: .github/instructions/decision-records.instructions.md
+  runtime: null
+  scope: project
+  owners:
+  - mertalpt/agent-collections/.apm/instructions/decision-records.instructions.md
+  active_owner: mertalpt/agent-collections/.apm/instructions/decision-records.instructions.md
+  content_hash: sha256:5291b0af87a9e1c0f4c0e12ff7d3ae52a990422c8c579417259e0f9c8c559391
+- kind: project-relative
+  target: copilot
   value: .github/instructions/documentation-standards.instructions.md
   runtime: null
   scope: project
   owners:
   - mertalpt/agent-collections/.apm/instructions/documentation-standards.instructions.md
   active_owner: mertalpt/agent-collections/.apm/instructions/documentation-standards.instructions.md
-  content_hash: sha256:80b910ea296ebbaea942b5a67c71be562e4f31f1afbe25a888b4ad045751fcba
+  content_hash: sha256:4bd455c5e8e678c56df6e37bfc02e3ff80ee9b6b964fad7e7402dbaa810b8736
 - kind: project-relative
   target: copilot
   value: .github/instructions/python-code.instructions.md
