@@ -8,7 +8,7 @@ labels: bug
 
 <!-- Fill in all but Model. -->
 * **Collection:** <!-- common, juju, python, or not sure -->
-* **Primitive:** <!-- e.g. `software-architect` -->
+* **Primitive:** <!-- e.g. `design-spec` -->
 * **Version:** <!-- Installed tag, e.g. `common-v0.3.1` -->
 * **Tool:** <!-- Claude Code, Copilot, or other, with its version -->
 * **Model:** <!-- Optional. -->

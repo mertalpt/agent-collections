@@ -9,9 +9,9 @@ targets:
 dependencies:
   apm:
   - git: parent
-    path: .apm/agents/product-owner.agent.md
+    path: .apm/skills/refine-task
   - git: parent
-    path: .apm/agents/software-architect.agent.md
+    path: .apm/skills/design-spec
   - git: parent
     path: .apm/skills/to-file
   - git: parent
