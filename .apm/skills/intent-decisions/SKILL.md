@@ -144,7 +144,8 @@ before adding records: `check` rejects moving it while it holds records.
 ## Setting up a repository
 
 1. Add the hook to `.pre-commit-config.yaml`, with `rev` set to the `intent`
-   collection's release tag, such as `intent-v0.1.0`:
+   collection's release tag, such as `intent-v0.1.0`, and commit it together
+   with the first record, since `check` fails without records:
 
    ```yaml
    - repo: https://github.com/mertalpt/agent-collections
@@ -165,7 +166,6 @@ before adding records: `check` rejects moving it while it holds records.
    request. CI is where the check cannot be skipped with `--no-verify`.
 4. Optionally, run `adr.py audit` in a CI job on the canonical branch, such
    as after each push, to find rows that bypassed the check.
-5. Add the first record.
 
 ## Limits
 
@@ -178,6 +178,8 @@ it does not catch such a row later; `audit` does, but only when someone runs
 it.
 * A wrong row cannot be repaired without bypassing the hook, because `check`
 rejects changes to rows below the newest.
+* `check` and `audit` fail without records, so deleting the last record
+means removing the hook in the same change set.
 * `INTENT_CONFIG` is not versioned. Every environment that runs the hook
 must set it the same way.
 * `check` does not catch a reference to a missing record written as code in
