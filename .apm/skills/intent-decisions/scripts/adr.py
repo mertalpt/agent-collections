@@ -618,7 +618,7 @@ def main(argv: list[str] | None = None) -> int:
         records = list_records(config.decisions)
         paths = given or sorted(
             {
-                *git("diff", "--name-only", base).splitlines(),
+                *git("diff", "--name-only", "--no-renames", base).splitlines(),
                 *git("ls-files", "--others", "--exclude-standard").splitlines(),
             }
         )

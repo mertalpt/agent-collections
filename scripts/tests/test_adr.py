@@ -480,6 +480,12 @@ class AffectedTest(unittest.TestCase):
         repo.write("README.md", "Hello.\n")
         self.assertEqual(repo.adr("affected").stdout.splitlines(), ["intent/decisions/docs.md"])
 
+    def test_includes_the_old_path_of_a_moved_file(self):
+        repo = Repo(self)
+        os.makedirs(os.path.join(repo.path, "lib"))
+        repo.git("mv", "src/app.py", "lib/app.py")
+        self.assertEqual(repo.adr("affected").stdout.splitlines(), ["intent/decisions/topic.md"])
+
 
 if __name__ == "__main__":
     unittest.main()
