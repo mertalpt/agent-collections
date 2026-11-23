@@ -179,8 +179,11 @@ class ParseConfigTest(unittest.TestCase):
         self.assertEqual(adr.parse_config(None), adr.Config("intent/decisions", None))
 
     def test_reads_settings(self):
-        text = 'canonical_branch = "origin/develop"\n[decisions]\npath = "design/adr/"\n'
-        self.assertEqual(adr.parse_config(text), adr.Config("design/adr", "origin/develop"))
+        text = (
+            'canonical_branch = "origin/develop"\n[decisions]\npath = "design/adr/"\n'
+            '[references]\nexclude = ["tests/**"]\n'
+        )
+        self.assertEqual(adr.parse_config(text), adr.Config("design/adr", "origin/develop", ("tests/**",)))
 
     def test_rejects_invalid_settings(self):
         cases = {
@@ -189,6 +192,10 @@ class ParseConfigTest(unittest.TestCase):
             "outside the repository": '[decisions]\npath = "../x"\n',
             "absolute path": '[decisions]\npath = "/x"\n',
             "empty branch": 'canonical_branch = ""\n',
+            "references not a table": 'references = ["tests/**"]\n',
+            "unknown references key": '[references]\ninclude = ["tests/**"]\n',
+            "exclude not a list": '[references]\nexclude = "tests/**"\n',
+            "empty exclude glob": '[references]\nexclude = [""]\n',
         }
         for name, text in cases.items():
             with self.subTest(name), self.assertRaises(adr.Error):
@@ -380,6 +387,27 @@ class CheckTest(unittest.TestCase):
             self,
             "README.md: refers to intent/decisions/topic.md, which does not exist",
             "intent/decisions/other.md: refers to intent/decisions/topic.md, which does not exist",
+        )
+
+    def test_skips_excluded_files_only_in_the_reference_check(self):
+        repo = Repo(self)
+        repo.write("tests/test_x.py", 'FIXTURE = "intent/decisions/gone.md"\n')
+        repo.write("README.md", "See intent/decisions/gone.md.\n")
+        repo.write("intent/config.toml", '[references]\nexclude = ["tests/**"]\n')
+        result = repo.adr("check")
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("README.md: refers to intent/decisions/gone.md", result.stderr)
+        self.assertNotIn("tests/test_x.py", result.stderr)
+
+    def test_rejects_exclude_globs_that_match_nothing_or_a_record(self):
+        repo = Repo(self)
+        repo.write("intent/decisions/other.md", record(decision="Unlike [gone](gone.md)."))
+        repo.write("intent/config.toml", '[references]\nexclude = ["lib/**", "intent/**"]\n')
+        repo.assert_check(
+            self,
+            "intent/config.toml: references.exclude glob matches no file: lib/**",
+            "references.exclude glob matches a record: intent/**: intent/decisions/other.md",
+            "intent/decisions/other.md: refers to intent/decisions/gone.md, which does not exist",
         )
 
     def test_rejects_globs_that_match_nothing(self):
