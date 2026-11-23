@@ -2,10 +2,10 @@
 
 ## Setup
 
-Install [pre-commit](https://pre-commit.com/) and PyYAML (`scripts/requirements.txt`), then enable the commit message hook:
+Install [pre-commit](https://pre-commit.com/) and PyYAML (`scripts/requirements.txt`), then enable the hooks:
 
 ```bash
-pre-commit install --hook-type commit-msg
+pre-commit install
 ```
 
 Then install the agent customizations used to develop this repository:
@@ -45,6 +45,10 @@ A collection lives in `collections/<name>/apm.yml` and pulls primitives from `.a
 - Adding or removing a primitive edits the collection's `apm.yml`, so it's always covered and needs `feat` or `fix`.
 - Deleting a collection is covered too, so it needs `feat` or `fix`. Existing tags stay, so pinned installs keep working. **Never reuse a deleted collection's name**; see [Limitations](docs/releasing.md#limitations).
 - A new collection picks its own starting `version`. It's tagged as-is on the first push to `main` after it's merged.
+
+## Decision records
+
+Decisions that the code does not show live in [`intent/decisions/`](intent/decisions/), one mutable record per topic, managed with the `intent` collection's `intent-decisions` skill. The pre-commit hook and CI check them.
 
 ## Releases
 

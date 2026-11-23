@@ -29,6 +29,8 @@ jobs:
         run: python3 scripts/release.py check-pr --base "$BASE" --head "$HEAD" --title "$TITLE"
       - name: Unit tests
         run: python3 -m unittest discover -s scripts/tests
+      - name: Check decision records
+        run: pre-commit run intent-decisions --all-files
       - uses: ./.github/actions/setup-apm
       - name: Audit covered files for hidden Unicode
         # `apm audit --file` takes one file per call; xargs runs them all and fails if any fails.

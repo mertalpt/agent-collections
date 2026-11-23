@@ -13,6 +13,7 @@ This repository contains my collections for agent customizations based on [APM](
 | `collections/` | Holds "virtual" APM packages built from grouping base files in `.apm/`. |
 | `dev/` | Holds the APM manifest for the collections used to develop the repository. |
 | `docs/` | Holds documentation for the repository. |
+| `intent/` | Holds the repository's [decision records](intent/decisions/) and their configuration. |
 | `scripts/` | Holds scripts used to manage the repository itself. |
 
 
