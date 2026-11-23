@@ -154,7 +154,12 @@ before adding records: `check` rejects moving it while it holds records.
    ```
 
 2. Make sure the canonical branch is known locally: `git remote set-head
-   origin --auto`, or set `canonical_branch`.
+   origin --auto`, or set `canonical_branch`. In a new repository, the hook
+   fails until the canonical branch has a commit: make the first commit
+   before installing the hook, or with `SKIP=intent-decisions git commit`.
+   Then push it and run `git remote set-head origin --auto`, or, in a
+   repository without a remote, set `canonical_branch` to a local branch,
+   such as `"main"`.
 3. In CI, check out the full history and the canonical branch, such as with
    `fetch-depth: 0` for `actions/checkout`, and run the hook against the pull
    request. CI is where the check cannot be skipped with `--no-verify`.
