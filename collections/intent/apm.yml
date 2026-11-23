@@ -1,5 +1,5 @@
 name: intent
-version: 0.1.0
+version: 0.2.0
 description: Mutable decision records checked into the repository under `intent/`, with a pre-commit hook that keeps their history index exact. Expects the common collection.
 author: Mert Alp Taytak
 license: MIT
