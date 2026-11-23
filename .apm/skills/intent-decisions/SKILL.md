@@ -93,9 +93,9 @@ exist. A reference is a path ending in `.md` that resolves, relative to the
 referring file or to the repository root, to a file in the decisions
 directory. In Markdown files, text inside inline code and fenced code blocks
 does not count, so write example paths as code and real references as links
-or plain text. In other files, such as source code, every path counts. A
-record's own changelog does not count, so its summaries may name deleted
-records.
+or plain text. In other files, such as source code, every path counts;
+exempt files that hold fixture paths with `references.exclude`. A record's
+own changelog does not count, so its summaries may name deleted records.
 
 ## Procedures
 
@@ -135,6 +135,11 @@ canonical_branch = "origin/develop"
 [decisions]
 # Default: intent/decisions
 path = "intent/decisions"
+
+[references]
+# Files the reference check skips, as Governs globs. Each must match a file
+# and no record. Default: none.
+exclude = ["tests/test_records.py"]
 ```
 
 `check` fails when the decisions directory holds no records, so a missing or

@@ -77,10 +77,12 @@ class Config:
         decisions: The decisions directory, relative to the repository root.
         canonical_branch: The ref where change sets become final, or `None`
             to use the one `origin/HEAD` points to.
+        references_exclude: Globs for the files the reference check skips.
     """
 
     decisions: str
     canonical_branch: str | None
+    references_exclude: tuple[str, ...] = ()
 
 
 # Functional core: plain values in, plain values out.
@@ -389,15 +391,19 @@ def parse_config(text: str | None) -> Config:
         Error: The file is not valid TOML or has unknown or invalid keys.
     """
     data = {} if text is None else tomllib.loads(text)
-    unknown = set(data) - {"canonical_branch", "decisions"}
+    unknown = set(data) - {"canonical_branch", "decisions", "references"}
     decisions = data.get("decisions", {})
-    if not isinstance(decisions, dict):
-        raise Error("config: `decisions` must be a table")
+    references = data.get("references", {})
+    for name, table in [("decisions", decisions), ("references", references)]:
+        if not isinstance(table, dict):
+            raise Error(f"config: `{name}` must be a table")
     unknown |= {f"decisions.{key}" for key in set(decisions) - {"path"}}
+    unknown |= {f"references.{key}" for key in set(references) - {"exclude"}}
     if unknown:
         raise Error(f"config: unknown keys: {', '.join(sorted(unknown))}")
     branch = data.get("canonical_branch")
     path = decisions.get("path", DEFAULT_DECISIONS)
+    exclude = references.get("exclude", [])
     if branch is not None and (not isinstance(branch, str) or not branch):
         raise Error("config: `canonical_branch` must be a non-empty string")
     if not isinstance(path, str) or not path:
@@ -405,7 +411,9 @@ def parse_config(text: str | None) -> Config:
     path = posixpath.normpath(path)
     if path.startswith("/") or path == ".." or path.startswith("../"):
         raise Error("config: `decisions.path` must be inside the repository")
-    return Config(path, branch)
+    if not isinstance(exclude, list) or not all(isinstance(glob, str) and glob for glob in exclude):
+        raise Error("config: `references.exclude` must be a list of non-empty strings")
+    return Config(path, branch, tuple(exclude))
 
 
 # Imperative shell: git and the file system.
@@ -537,7 +545,13 @@ def check(config: Config, conf_path: str, base: str) -> list[str]:
         touch = last_touch(base, path) if base_text is not None else None
         errors += [f"{path}: {e}" for e in change_errors(record, base_record, text != base_text, touch)]
     name = posixpath.basename(config.decisions)
+    for glob in config.references_exclude:
+        if not governed([glob], files):
+            errors.append(f"{conf_path}: references.exclude glob matches no file: {glob}")
+        for path in governed([glob], records):
+            errors.append(f"{conf_path}: references.exclude glob matches a record: {glob}: {path}")
     mentioning = git("grep", "-l", "-I", "--untracked", "-F", "-e", name, ok=(0, 1)).splitlines()
+    mentioning = [path for path in mentioning if not governed(config.references_exclude, [path])]
     texts = {path: read(path) for path in {*mentioning, *records} if os.path.isfile(path)}
     for path, target in dangling(texts, config.decisions, set(records)):
         errors.append(f"{path}: refers to {target}, which does not exist")
