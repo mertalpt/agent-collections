@@ -142,15 +142,17 @@ path = "intent/decisions"
 exclude = ["tests/test_records.py"]
 ```
 
-`check` fails when the decisions directory holds no records, so a missing or
-wrong `INTENT_CONFIG` fails instead of checking nothing. Choose the location
+`check` and `audit` fail when the decisions directory does not exist, so a
+missing or wrong `INTENT_CONFIG` fails instead of checking nothing. Choose the location
 before adding records: `check` rejects moving it while it holds records.
 
 ## Setting up a repository
 
 1. Add the hook to `.pre-commit-config.yaml`, with `rev` set to the `intent`
    collection's release tag, such as `intent-v0.1.0`, and commit it together
-   with the first record, since `check` fails without records:
+   with the decisions directory, since `check` fails without it. Git does not
+   track empty directories, so keep a file such as `.gitkeep` in it until the
+   first record:
 
    ```yaml
    - repo: https://github.com/mertalpt/agent-collections
@@ -183,8 +185,8 @@ it does not catch such a row later; `audit` does, but only when someone runs
 it.
 * A wrong row cannot be repaired without bypassing the hook, because `check`
 rejects changes to rows below the newest.
-* `check` and `audit` fail without records, so deleting the last record
-means removing the hook in the same change set.
+* A wrong decisions location that names an existing directory without
+records passes `check`, which then checks nothing.
 * `INTENT_CONFIG` is not versioned. Every environment that runs the hook
 must set it the same way.
 * `check` does not catch a reference to a missing record written as code in

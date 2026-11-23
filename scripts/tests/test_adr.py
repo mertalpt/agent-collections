@@ -421,7 +421,7 @@ class CheckTest(unittest.TestCase):
         repo.write("intent/config.toml", '[decisions]\npath = "intent/adr"\n')
         repo.assert_check(self, "decisions moved from intent/decisions/")
 
-    def test_fails_when_no_records_are_found(self):
+    def test_fails_when_the_decisions_directory_is_missing(self):
         repo = Repo(self)
         repo.assert_check(self)
         result = repo.adr("check", env={adr.CONFIG_ENV: "elsewhere.toml"})
@@ -429,7 +429,15 @@ class CheckTest(unittest.TestCase):
         repo.write("elsewhere.toml", '[decisions]\npath = "docs/adr"\n')
         result = repo.adr("check", env={adr.CONFIG_ENV: "elsewhere.toml"})
         self.assertEqual(result.returncode, 1)
-        self.assertIn("no decision records found at docs/adr/", result.stderr)
+        self.assertIn("no decisions directory at docs/adr/", result.stderr)
+
+    def test_accepts_a_decisions_directory_without_records(self):
+        repo = Repo(self)
+        os.remove(os.path.join(repo.path, "intent/decisions/topic.md"))
+        repo.write("intent/decisions/.gitkeep", "")
+        repo.assert_check(self)
+        repo.commit("Remove the last record")
+        self.assertEqual((repo.adr("audit").returncode, repo.adr("affected", "src/app.py").stdout), (0, ""))
 
     def test_fails_when_the_canonical_branch_is_unknown(self):
         repo = Repo(self)
@@ -463,6 +471,14 @@ class AuditTest(unittest.TestCase):
         result = repo.adr("audit")
         self.assertEqual(result.returncode, 1)
         self.assertIn(f"intent/decisions/topic.md: row {HASH_A}: not a first-parent commit", result.stderr)
+
+    def test_fails_when_the_decisions_directory_is_not_committed(self):
+        repo = Repo(self)
+        repo.write("intent/config.toml", '[decisions]\npath = "docs/adr"\n')
+        repo.commit("Configure")
+        result = repo.adr("audit")
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("no decisions directory committed at docs/adr/", result.stderr)
 
     def test_does_not_need_the_canonical_branch(self):
         repo = Repo(self)

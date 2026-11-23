@@ -490,14 +490,12 @@ def list_records(decisions: str) -> list[str]:
     """Returns the record paths in the working tree.
 
     Raises:
-        Error: There are none, which in a repository that runs the hook
-            means the location is misconfigured.
+        Error: The directory does not exist, which in a repository that runs
+            the hook means the location is misconfigured.
     """
-    names = sorted(os.listdir(decisions)) if os.path.isdir(decisions) else []
-    records = [f"{decisions}/{name}" for name in names if name.endswith(".md")]
-    if not records:
-        raise Error(f"no decision records found at {decisions}/; create one, or set {CONFIG_ENV}")
-    return records
+    if not os.path.isdir(decisions):
+        raise Error(f"no decisions directory at {decisions}/; create it, or set {CONFIG_ENV}")
+    return [f"{decisions}/{name}" for name in sorted(os.listdir(decisions)) if name.endswith(".md")]
 
 
 def read(path: str) -> str:
@@ -567,9 +565,9 @@ def check(config: Config, conf_path: str, base: str) -> list[str]:
 def audit(config: Config) -> list[str]:
     """Checks every committed record's changelog against its whole history."""
     names = git("ls-tree", "--name-only", "HEAD", f"{config.decisions}/").splitlines()
+    if not names:
+        raise Error(f"no decisions directory committed at {config.decisions}/; create it, or set {CONFIG_ENV}")
     records = sorted(name for name in names if name.endswith(".md"))
-    if not records:
-        raise Error(f"no decision records committed at {config.decisions}/; create one, or set {CONFIG_ENV}")
     errors = []
     for path in records:
         try:
