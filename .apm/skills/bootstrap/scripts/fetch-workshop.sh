@@ -1,6 +1,6 @@
 #!/bin/sh
-# Fetches a Workshop template and the APM in-project SDK from a release tag
-# into .workshop/ of the current directory, naming the workshop after it.
+# Fetches a Workshop template and the in-project SDKs it uses from a release
+# tag into .workshop/ of the current directory, naming the workshop after it.
 #
 # Usage: fetch-workshop.sh TAG TEMPLATE
 #   TAG       a workshop-v* release tag, such as workshop-v0.1.0
@@ -25,22 +25,29 @@ if ! printf '%s\n' "$name" | grep -Eq '^[a-z][a-z0-9]*(-[a-z0-9]+)*$' \
   exit 1
 fi
 
-for path in ".workshop/$name.yaml" .workshop/apm; do
-  if [ -e "$path" ]; then
-    echo "error: $path already exists" >&2
+tmp=$(mktemp -d)
+trap 'rm -rf "$tmp"' EXIT
+curl -fsSL -o "$tmp/template.yaml" "$assets/workshops/$template.yaml"
+sed "s/^name: .*/name: $name/" "$tmp/template.yaml" > "$tmp/workshop.yaml"
+
+# Each in-project SDK in assets/sdks/ is a sdk.yaml and a setup-base hook.
+sdks=$(sed -n 's/^ *- name: project-\([a-z0-9-]*\) *$/\1/p' "$tmp/template.yaml")
+for sdk in $sdks; do
+  mkdir -p "$tmp/sdks/$sdk/hooks"
+  curl -fsSL -o "$tmp/sdks/$sdk/sdk.yaml" "$assets/sdks/$sdk/sdk.yaml"
+  curl -fsSL -o "$tmp/sdks/$sdk/hooks/setup-base" "$assets/sdks/$sdk/hooks/setup-base"
+done
+
+for path in "$name.yaml" $sdks; do
+  if [ -e ".workshop/$path" ]; then
+    echo "error: .workshop/$path already exists" >&2
     exit 1
   fi
 done
 
-tmp=$(mktemp -d)
-trap 'rm -rf "$tmp"' EXIT
-mkdir -p "$tmp/apm/hooks"
-curl -fsSL -o "$tmp/template.yaml" "$assets/workshops/$template.yaml"
-curl -fsSL -o "$tmp/apm/sdk.yaml" "$assets/sdks/apm/sdk.yaml"
-curl -fsSL -o "$tmp/apm/hooks/setup-base" "$assets/sdks/apm/hooks/setup-base"
-sed "s/^name: .*/name: $name/" "$tmp/template.yaml" > "$tmp/workshop.yaml"
-
 mkdir -p .workshop
-mv "$tmp/apm" .workshop/apm
+for sdk in $sdks; do
+  mv "$tmp/sdks/$sdk" ".workshop/$sdk"
+done
 mv "$tmp/workshop.yaml" ".workshop/$name.yaml"
-echo "Created .workshop/$name.yaml and .workshop/apm/ from $tag."
+echo "Created .workshop/$name.yaml and in-project SDKs:" $sdks

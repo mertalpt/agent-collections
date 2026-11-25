@@ -4,6 +4,7 @@ sdks:
   - name: claude-code
   - name: gh-cli
   - name: project-apm
+  - name: project-pre-commit
 actions:
   status: |
     BOLD=$(tput bold); NORMAL=$(tput sgr0)
@@ -19,6 +20,9 @@ actions:
     echo ""
     echo -e "${BOLD}# APM${NORMAL}"
     apm --version || true
+    echo ""
+    echo -e "${BOLD}# pre-commit${NORMAL}"
+    pre-commit --version || true
     echo ""
     echo -e "${BOLD}# Project${NORMAL}"
     if [ -z "$(ls -A /project)" ]; then

@@ -1,6 +1,6 @@
 # workshop
 
-A [Workshop](https://ubuntu.com/workshop/docs/) template that sandboxes Claude Code with the GitHub CLI and the APM CLI, and a `bootstrap` skill that sets up a new project inside it. The host needs only `curl` and Workshop; APM is installed and run inside the Workshop.
+A [Workshop](https://ubuntu.com/workshop/docs/) template that sandboxes Claude Code with the GitHub CLI, the APM CLI, and pre-commit, and a `bootstrap` skill that sets up a new project inside it. The host needs only `curl` and Workshop; APM is installed and run inside the Workshop.
 
 ## Setting up a project
 
@@ -15,7 +15,7 @@ curl -fsSL "https://raw.githubusercontent.com/mertalpt/agent-collections/$tag/.a
   | sh -s -- "$tag" claude-code
 ```
 
-The first command finds the latest `workshop-v*` release tag; to pin an older one, set `tag` yourself. The script creates `.workshop/<directory name>.yaml` and the in-project SDK `.workshop/apm/`, which installs the APM CLI. The directory name must be a valid workshop name: a lowercase letter, then lowercase letters and digits with single hyphens between them, up to 40 characters. The script refuses to overwrite existing files.
+The first command finds the latest `workshop-v*` release tag; to pin an older one, set `tag` yourself. The script creates `.workshop/<directory name>.yaml` and the in-project SDKs `.workshop/apm/` and `.workshop/pre-commit/`, which install the APM CLI and pre-commit. The directory name must be a valid workshop name: a lowercase letter, then lowercase letters and digits with single hyphens between them, up to 40 characters. The script refuses to overwrite existing files.
 
 ### 2. Launch and enter the Workshop
 
@@ -41,9 +41,7 @@ Use the same tag as in step 1. `--target claude` records the harness in `apm.yml
 
 ### 4. Run the skill
 
-Start Claude Code with `claude`, or with the `claude-skip-permissions` action from the host, and run `/bootstrap`. It sets up the git repository, GitHub authentication, git identity, and the collections you choose, and tells you which Workshop actions to run when it needs you.
-
-Commit `.workshop/`, `apm.yml`, and `apm.lock.yaml` with the project.
+Start Claude Code with `claude`, or with the `claude-skip-permissions` action from the host, and run `/bootstrap`. It sets up the git repository and the collections you choose. It offers to run the other steps, such as git identity, the first commit, and creating the GitHub repository, and tells you which Workshop actions to run for logins.
 
 ## Actions
 
@@ -51,7 +49,7 @@ Run an action from the host with `workshop run -- <action>`.
 
 | Action | Does |
 | --- | --- |
-| `status` | Shows the GitHub, Claude, git identity, and APM status, and whether `/project` is empty, a repository without a remote, or a clone. |
+| `status` | Shows the GitHub, Claude, git identity, APM, and pre-commit status, and whether `/project` is empty, a repository without a remote, or a clone. |
 | `gh-auth` | Logs in to GitHub and sets up git to use the login. |
 | `git-identity` | Prompts for the git `user.name` and `user.email`. |
 | `claude-auth` | Logs in to Claude. |

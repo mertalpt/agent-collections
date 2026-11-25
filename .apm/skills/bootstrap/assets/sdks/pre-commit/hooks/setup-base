@@ -1,0 +1,3 @@
+# Workshop runs this as root with errexit and pipefail set.
+apt-get update
+DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends pre-commit

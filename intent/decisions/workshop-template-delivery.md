@@ -30,17 +30,20 @@ and pinnable, accepting a fetch step on the host before APM is available.
   the `workshop` collection, together with `scripts/fetch-workshop.sh`.
 - On the host, the user fetches a template with `curl` from a `workshop-v*`
   release tag, never from `main`. The host needs only `curl` and Workshop.
-- APM is installed by the in-project SDK in `assets/sdks/apm/`, which the
-  fetch script copies to `.workshop/apm/`. Its `setup-base` hook installs a
-  pinned APM release and verifies its checksum.
+- Software that the template needs and the SDK Store does not provide is
+  installed by in-project SDKs in `assets/sdks/`, one `sdk.yaml` and one
+  `setup-base` hook each. The fetch script copies every `project-<name>` SDK
+  the template lists to `.workshop/<name>/`. The `apm` SDK installs a pinned
+  APM release and verifies its checksum; the `pre-commit` SDK installs
+  pre-commit from the Ubuntu archive.
 
 ## Consequences
 
 - The documented fetch commands, the fetch script's arguments, and existing
   Workshops are an interface: adding a harness or template must keep them
   working.
-- Upgrading APM in an existing project means replacing `.workshop/apm/` with
-  the one from a newer tag.
+- Upgrading an in-project SDK in an existing project means replacing its
+  directory under `.workshop/` with the one from a newer tag.
 
 ## Alternatives
 
@@ -63,4 +66,5 @@ and pinnable, accepting a fetch step on the host before APM is available.
 
 - APM can deploy files to arbitrary project paths, such as `.workshop/`.
 - Workshop can include, extend, or fetch definitions from a remote source.
-- APM is available as an SDK on the Workshop SDK Store.
+- The Workshop SDK Store offers an SDK for software that an in-project SDK
+  installs, such as APM or pre-commit.

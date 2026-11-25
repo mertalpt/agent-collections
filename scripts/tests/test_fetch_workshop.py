@@ -81,7 +81,7 @@ class FetchWorkshopTest(unittest.TestCase):
         self.assertIn("already exists", result.stderr)
         with open(existing) as f:
             self.assertEqual(f.read(), "mine\n")
-        self.assertFalse(os.path.exists(os.path.join(self.tmp, "proj", ".workshop", "apm")))
+        self.assertEqual(os.listdir(os.path.dirname(existing)), ["proj.yaml"])
 
     def test_rejects_a_directory_name_workshop_does_not_accept(self):
         for project in ("My_Project", "2fast", "trailing-", "a" * 41):
