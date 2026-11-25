@@ -27,6 +27,8 @@ apm install mertalpt/agent-collections/collections/<name>#<name>-vX.Y.Z
 
 The `intent` collection's checks run as a pre-commit hook; see "Setting up a repository" in [its skill](.apm/skills/intent-decisions/SKILL.md).
 
+The `workshop` collection is installed inside a Workshop that you fetch first; see [its README](collections/workshop/README.md).
+
 Check for newer releases with `apm outdated`. Release notes are on the [GitHub Releases](https://github.com/mertalpt/agent-collections/releases) page.
 
 ## Contributing

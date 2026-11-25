@@ -1,0 +1,50 @@
+name: claude-code
+base: ubuntu@24.04
+sdks:
+  - name: claude-code
+  - name: gh-cli
+  - name: project-apm
+  - name: project-pre-commit
+actions:
+  status: |
+    BOLD=$(tput bold); NORMAL=$(tput sgr0)
+    echo -e "${BOLD}# GitHub auth status${NORMAL}"
+    gh auth status || true
+    echo ""
+    echo -e "${BOLD}# Claude auth status${NORMAL}"
+    claude auth status || true
+    echo ""
+    echo -e "${BOLD}# Git identity${NORMAL}"
+    git config --global user.name || echo "user.name is not set"
+    git config --global user.email || echo "user.email is not set"
+    echo ""
+    echo -e "${BOLD}# APM${NORMAL}"
+    apm --version || true
+    echo ""
+    echo -e "${BOLD}# pre-commit${NORMAL}"
+    pre-commit --version || true
+    echo ""
+    echo -e "${BOLD}# Project${NORMAL}"
+    if [ -z "$(ls -A /project)" ]; then
+      echo "/project is empty"
+    elif ! git -C /project rev-parse --git-dir >/dev/null 2>&1; then
+      echo "/project is not a git repository"
+    elif [ -z "$(git -C /project remote)" ]; then
+      echo "/project is a git repository with no remote"
+    else
+      git -C /project remote -v
+    fi
+  gh-auth: |
+    echo "Use a fine-grained PAT scoped to this project's repository."
+    echo "If the repository does not exist yet, edit the PAT to add it once it does."
+    gh auth login
+    gh auth setup-git
+  git-identity: |
+    printf "Git user.name: "; read -r name
+    printf "Git user.email: "; read -r email
+    git config --global user.name "$name"
+    git config --global user.email "$email"
+  claude-auth: |
+    claude auth login
+  claude-skip-permissions: |
+    claude --dangerously-skip-permissions

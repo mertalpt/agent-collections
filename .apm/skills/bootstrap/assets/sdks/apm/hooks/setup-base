@@ -1,0 +1,26 @@
+# Workshop runs this as root with errexit and pipefail set.
+version=0.39.0
+case "$(dpkg --print-architecture)" in
+  amd64)
+    arch=x86_64
+    sha256=3a84e9c14ab594c22e97f6ccc9be41bed14199fe4f4aa24a206d23b65919592d
+    ;;
+  arm64)
+    arch=arm64
+    sha256=01ba7e98b71469225298557dd06fb4ea9e8de61c739182d09b3e26c788c1d975
+    ;;
+  *)
+    echo "APM has no Linux release for $(dpkg --print-architecture)" >&2
+    exit 1
+    ;;
+esac
+
+archive=$(mktemp)
+curl -fsSL -o "$archive" \
+  "https://github.com/microsoft/apm/releases/download/v${version}/apm-linux-${arch}.tar.gz"
+echo "${sha256}  ${archive}" | sha256sum -c -
+rm -rf /opt/apm
+mkdir -p /opt/apm
+tar xzf "$archive" -C /opt/apm --strip-components=1
+rm "$archive"
+ln -sf /opt/apm/apm /usr/local/bin/apm
