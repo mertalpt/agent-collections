@@ -1,0 +1,14 @@
+name: workshop
+version: 0.1.0
+description: A Workshop template for sandboxing coding agents, and a skill that sets up a new project inside it. The host needs only curl and Workshop.
+author: Mert Alp Taytak
+license: MIT
+targets:
+- claude
+- copilot
+dependencies:
+  apm:
+  - git: parent
+    path: .apm/skills/bootstrap
+  mcp: []
+includes: auto
